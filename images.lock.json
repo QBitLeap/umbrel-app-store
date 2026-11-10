@@ -1,7 +1,7 @@
 {
-  "core": "ghcr.io/qbitleap/qbit-core@sha256:2e97a63ce8c8e1bddc092371fb734565beff2cdb626f85c64a51c754e8420a8b",
-  "leap": "ghcr.io/qbitleap/leap-indexer@sha256:85a6ca3173b683321858f3a4bf9caec7920edb9db2ca58fed25673ed06ae0b11",
-  "pins": "ghcr.io/qbitleap/pins-indexer@sha256:51b436cb9ca4e05dc0c0f3ac6e06e6c99a150a5106cd4bd45f6349b815191dfa",
-  "qord": "ghcr.io/qbitleap/qord-indexer@sha256:434a50573ab9638c8bc6823b9967f546e55ec24d485aef6ed19ed5152708ea2d",
-  "services": "ghcr.io/qbitleap/qbit-core-services@sha256:d1200610437d8ff677067178e92e837fb02e6549488fb17ec0ef983084a2e5e4"
+  "core": "ghcr.io/qbitleap/qbit-core@sha256:2ff0e28b898357563bfe0fbe34d33b633607f2624c147d830efad5b186a549bd",
+  "leap": "ghcr.io/qbitleap/leap-indexer@sha256:94ff71a238c40e58995dfb93524cd7f8475ac6935169d386027adb0d9ba787ed",
+  "pins": "ghcr.io/qbitleap/pins-indexer@sha256:ed41227832bf079e8af427b1ea024ae497f66ba354d3f43e35c82fef81db5f6d",
+  "qord": "ghcr.io/qbitleap/qord-indexer@sha256:e993bb1f63f6d070b51ea0a3fc18901b87aefc68f6baab25c0d436ea870e9299",
+  "services": "ghcr.io/qbitleap/qbit-core-services@sha256:fa49c92ca718450c058ac336ea56970b5576f2cfd7f2ea707ca78ebee3963f98"
 }

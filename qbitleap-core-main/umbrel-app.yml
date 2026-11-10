@@ -17,13 +17,25 @@
         "1"
       ],
       "note": "1 starts peer synchronization. The dashboard switch saves a choice across restarts; changing this setting resets that choice."
+    },
+    {
+      "name": "QBIT_WALLET_ENABLED",
+      "services": [
+        "core"
+      ],
+      "default": "0",
+      "options": [
+        "0",
+        "1"
+      ],
+      "note": "Enable local Core wallets for LEAP and qord terminal commands."
     }
   ],
   "category": "finance",
   "name": "Qbit Core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "tagline": "Your own Qbit node and authenticated indexer reads",
-  "description": "Run an independent Qbit Core node with a browser status page. Peer synchronization starts automatically. Pause or resume it with the dashboard switch. Wallets are disabled. Compatible indexers use authenticated read RPC; Core cookies stay private. Each instance keeps its own network-specific data. This is an amd64 package candidate.",
+  "description": "Run an independent Qbit Core node with a browser status page. Peer synchronization starts automatically. Pause or resume it with the dashboard switch. Local Core wallets are optional. Compatible indexers use authenticated read RPC. Each instance keeps its own network-specific data. This is an amd64 package candidate.",
   "releaseNotes": "Configurable minute refresh, explicit sync progress, saved networking switch and automatic peer synchronization for new nodes.",
   "developer": "QBitLeap",
   "website": "https://github.com/Qbit-Org/qbit",
@@ -31,7 +43,7 @@
   "repo": "https://github.com/QBitLeap/qbit-core-umbrel",
   "support": "https://github.com/QBitLeap/qbit-core-umbrel/issues",
   "port": 5100,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/qbit-core-umbrel/cc09418941fbd3c5f9badef7a9147a4f9ed2b49e/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/qbit-core-umbrel/674f0692c9d4614ebcd2fbda586570b3776ee028/icon.svg",
   "gallery": [],
   "path": "",
   "submitter": "QBitLeap"

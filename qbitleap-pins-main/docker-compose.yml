@@ -7,7 +7,7 @@
       }
     },
     "transport": {
-      "image": "ghcr.io/qbitleap/pins-indexer@sha256:51b436cb9ca4e05dc0c0f3ac6e06e6c99a150a5106cd4bd45f6349b815191dfa",
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:ed41227832bf079e8af427b1ea024ae497f66ba354d3f43e35c82fef81db5f6d",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -47,7 +47,7 @@
       }
     },
     "indexer": {
-      "image": "ghcr.io/qbitleap/pins-indexer@sha256:51b436cb9ca4e05dc0c0f3ac6e06e6c99a150a5106cd4bd45f6349b815191dfa",
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:ed41227832bf079e8af427b1ea024ae497f66ba354d3f43e35c82fef81db5f6d",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -86,7 +86,7 @@
       "stop_grace_period": "2m"
     },
     "ui": {
-      "image": "ghcr.io/qbitleap/pins-indexer@sha256:51b436cb9ca4e05dc0c0f3ac6e06e6c99a150a5106cd4bd45f6349b815191dfa",
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:ed41227832bf079e8af427b1ea024ae497f66ba354d3f43e35c82fef81db5f6d",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",

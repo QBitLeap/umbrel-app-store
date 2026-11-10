@@ -4,15 +4,15 @@
   "appId": "qbitleap-leap-main",
   "coreAppId": "qbitleap-core-main",
   "chain": "main",
-  "image": "ghcr.io/qbitleap/leap-indexer@sha256:85a6ca3173b683321858f3a4bf9caec7920edb9db2ca58fed25673ed06ae0b11",
+  "image": "ghcr.io/qbitleap/leap-indexer@sha256:94ff71a238c40e58995dfb93524cd7f8475ac6935169d386027adb0d9ba787ed",
   "localFixtureImages": false,
   "fullUmbrelAppAccepted": false,
   "publicImagePublicationAccepted": false,
   "files": {
     "data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "docker-compose.yml": "1cb97b34fcfbea1361f2a9cedaf0b4fa14941464013e12f393b9fd488f3878e7",
+    "docker-compose.yml": "0d71e17a5a67750cfa534392e90139a2d0f7274cd87b1ff76f3608825ded3cf9",
     "exports.sh": "e867b483e0408cc9401a53984d01a7bc316393c3db20369c8d87aa6184590635",
     "icon.svg": "269437c3a8105cb75ea0307809c02dd3419808051ab0118e630d861b5429e509",
-    "umbrel-app.yml": "b555869a63f995d2aae99ce5f65ccfce9093dd1ab0dc7e54ce43a5a78093889c"
+    "umbrel-app.yml": "c3a6fb442355e6d5b9fb61b0aceee03fad71679c3878e624ca73431d7c513ae5"
   }
 }

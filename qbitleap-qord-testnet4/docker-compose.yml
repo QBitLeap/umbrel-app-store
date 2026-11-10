@@ -7,7 +7,7 @@
       }
     },
     "transport": {
-      "image": "ghcr.io/qbitleap/qord-indexer@sha256:434a50573ab9638c8bc6823b9967f546e55ec24d485aef6ed19ed5152708ea2d",
+      "image": "ghcr.io/qbitleap/qord-indexer@sha256:e993bb1f63f6d070b51ea0a3fc18901b87aefc68f6baab25c0d436ea870e9299",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -47,7 +47,7 @@
       }
     },
     "indexer": {
-      "image": "ghcr.io/qbitleap/qord-indexer@sha256:434a50573ab9638c8bc6823b9967f546e55ec24d485aef6ed19ed5152708ea2d",
+      "image": "ghcr.io/qbitleap/qord-indexer@sha256:e993bb1f63f6d070b51ea0a3fc18901b87aefc68f6baab25c0d436ea870e9299",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -86,7 +86,7 @@
       "stop_grace_period": "2m"
     },
     "ui": {
-      "image": "ghcr.io/qbitleap/qord-indexer@sha256:434a50573ab9638c8bc6823b9967f546e55ec24d485aef6ed19ed5152708ea2d",
+      "image": "ghcr.io/qbitleap/qord-indexer@sha256:e993bb1f63f6d070b51ea0a3fc18901b87aefc68f6baab25c0d436ea870e9299",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
