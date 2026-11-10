@@ -1,0 +1,77 @@
+name: Validate and publish catalog
+on:
+  workflow_dispatch:
+    inputs:
+      images_json:
+        description: JSON object with the five published GHCR digest references
+        required: true
+        type: string
+      version:
+        description: New app package version
+        required: true
+        type: string
+      publish_catalog:
+        description: Commit the catalog only after all integration checks pass
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: read
+concurrency:
+  group: community-catalog
+  cancel-in-progress: false
+jobs:
+  catalog:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.13'
+      - run: python -m unittest discover -s tests -v
+      - name: Read and validate explicit image input
+        env:
+          IMAGES_JSON: ${{ inputs.images_json }}
+        run: |
+          mkdir -p .release
+          python -c "import json,os; from pathlib import Path; from sys import path; path.insert(0,'scripts'); from catalog import validate_images; value=validate_images(json.loads(os.environ['IMAGES_JSON'])); Path('.release/input-images.json').write_text(json.dumps(value))"
+      - name: Require anonymously pullable registry manifests
+        run: python scripts/check_public_images.py .release/input-images.json
+      - name: Fetch pinned app source snapshots
+        run: python scripts/fetch_sources.py .release/sources
+      - name: Test both networks with owned empty-chain data only
+        run: python checks/integration.py .release/input-images.json --sources sources.lock.json --output .release/acceptance.json
+      - name: Generate the accepted catalog
+        env:
+          PACKAGE_VERSION: ${{ inputs.version }}
+        run: python scripts/catalog.py .release/catalog --apps-root .release/sources --sources sources.lock.json --images .release/input-images.json --acceptance .release/acceptance.json --version "$PACKAGE_VERSION"
+      - name: Promote catalog after explicit approval
+        if: inputs.publish_catalog
+        env:
+          PACKAGE_VERSION: ${{ inputs.version }}
+        run: |
+          python -c "from pathlib import Path; from sys import path; path.insert(0,'scripts'); from catalog import promote; promote(Path('.release/catalog'),Path('.'))"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config commit.gpgsign false
+          git add -- qbitleap-core-main qbitleap-core-testnet4 qbitleap-leap-main qbitleap-leap-testnet4 qbitleap-pins-main qbitleap-pins-testnet4 qbitleap-qord-main qbitleap-qord-testnet4 images.lock.json acceptance.json catalog-manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish community catalog $PACKAGE_VERSION"
+            git push origin HEAD:main
+          fi
+      - name: Retain accepted catalog and test evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: community-catalog
+          include-hidden-files: true
+          if-no-files-found: ignore
+          path: |
+            .release/catalog
+            .release/acceptance.json
