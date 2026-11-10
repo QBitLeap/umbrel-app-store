@@ -15,7 +15,7 @@
     },
     "qord": {
       "repository": "https://github.com/QBitLeap/qord-umbrel.git",
-      "commit": "00cbe37dad0ab9169f2ac8223e50e19c43000240"
+      "commit": "1900b359dfd38e4faa9e99505072eac4dabfed50"
     }
   }
 }
