@@ -43,8 +43,7 @@ https://github.com/QBitLeap/umbrel-app-store
 
 Install a Core instance before its dependent indexers. Core starts peer synchronization automatically on new installations. Its
 dashboard switch can pause/resume networking through the existing Umbrel app access.
-Indexers start paused; enable indexing in app settings after selecting the
-intended network. All dashboards default to a one-minute refresh and accept
+Core wallets and indexers start automatically. All dashboards default to a one-minute refresh and accept
 longer whole-minute intervals. Each instance owns
 separate data. Never share a writable chain or index folder.
 

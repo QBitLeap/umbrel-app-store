@@ -241,7 +241,7 @@ print(json.dumps({'status':code,'body':value}))
             core_read, core_ui = secrets.token_hex(32), secrets.token_hex(32)
             control = secrets.token_hex(32)
             core = self.start("core", self.images["core"], ["serve"],
-                              {"QBIT_CHAIN": self.chain, "QBIT_NETWORK_ACTIVE": "0", "QBIT_WALLET_ENABLED": "1"},
+                              {"QBIT_CHAIN": self.chain, "QBIT_NETWORK_ACTIVE": "0"},
                               volumes=[(core_data, "/data", False), (core_auth, "/auth", False), (control_data, "/settings", False)], memory="1536m")
             broker = self.start("broker", self.images["services"], ["broker"],
                                 {"QBIT_CHAIN": self.chain, "QBIT_READ_TOKEN": core_read, "QBIT_UI_TOKEN": core_ui,
@@ -326,13 +326,15 @@ print(json.dumps({'status':code,'body':value}))
                 transport = self.start(protocol + "-transport", self.images[protocol], ["transport"],
                     {**common, "INDEX_CORE_READ_URL": "http://" + core + ":8081/", "INDEX_CORE_READ_TOKEN": core_read}, memory="1024m")
                 writer = self.start(protocol + "-indexer", self.images[protocol], ["indexer"],
-                    {**common, "INDEX_ENABLED": "1"}, share=transport, volumes=[(data, "/data", False)], memory="2048m")
+                    common, share=transport, volumes=[(data, "/data", False)], memory="2048m")
                 front = self.start(protocol + "-ui", self.images[protocol], ["ui"],
-                    {**common, "INDEX_API_TOKEN": api, "INDEX_ENABLED": "1"}, share=transport, volumes=[(data, "/data", True)])
+                    {**common, "INDEX_API_TOKEN": api}, share=transport, volumes=[(data, "/data", True)])
                 status = self.wait(lambda: self.probe(front, "http://127.0.0.1:8080/v1/status", role="reader", token_env="INDEX_API_TOKEN"),
                                    [transport, writer, front], timeout=100)["body"]
                 if status.get("network") != self.chain or status.get("transactionRoutingAccepted"):
                     raise RuntimeError("Indexer status binding differs")
+                if status.get("indexingEnabled") is not True:
+                    raise RuntimeError("Indexer did not start by default")
                 if self.probe(front, "http://127.0.0.1:8080/v1/status")["status"] != 401:
                     raise RuntimeError("Unauthenticated index API accepted")
                 tip_error = self.probe(transport, "http://127.0.0.1:8081/", body={**query,
