@@ -7,7 +7,7 @@
       }
     },
     "transport": {
-      "image": "ghcr.io/qbitleap/leap-indexer@sha256:94ff71a238c40e58995dfb93524cd7f8475ac6935169d386027adb0d9ba787ed",
+      "image": "ghcr.io/qbitleap/leap-indexer@sha256:9343657b402a707dc52008762bcae06947b59c549d9f60d6ebb5281ebf93017c",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -47,7 +47,7 @@
       }
     },
     "indexer": {
-      "image": "ghcr.io/qbitleap/leap-indexer@sha256:94ff71a238c40e58995dfb93524cd7f8475ac6935169d386027adb0d9ba787ed",
+      "image": "ghcr.io/qbitleap/leap-indexer@sha256:9343657b402a707dc52008762bcae06947b59c549d9f60d6ebb5281ebf93017c",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -70,7 +70,7 @@
         "INDEX_PROTOCOL": "leap",
         "QBIT_CHAIN": "main",
         "INDEX_LOCAL_TOKEN": "${APP_QBITLEAP_LEAP_MAIN_LOCAL_TOKEN}",
-        "INDEX_ENABLED": "${INDEX_ENABLED:-0}"
+        "INDEX_ENABLED": "${INDEX_ENABLED:-1}"
       },
       "volumes": [
         "${APP_DATA_DIR}/data/index:/data"
@@ -86,7 +86,7 @@
       "stop_grace_period": "2m"
     },
     "ui": {
-      "image": "ghcr.io/qbitleap/leap-indexer@sha256:94ff71a238c40e58995dfb93524cd7f8475ac6935169d386027adb0d9ba787ed",
+      "image": "ghcr.io/qbitleap/leap-indexer@sha256:9343657b402a707dc52008762bcae06947b59c549d9f60d6ebb5281ebf93017c",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -110,7 +110,7 @@
         "QBIT_CHAIN": "main",
         "INDEX_LOCAL_TOKEN": "${APP_QBITLEAP_LEAP_MAIN_LOCAL_TOKEN}",
         "INDEX_API_TOKEN": "${APP_QBITLEAP_LEAP_MAIN_API_TOKEN}",
-        "INDEX_ENABLED": "${INDEX_ENABLED:-0}"
+        "INDEX_ENABLED": "${INDEX_ENABLED:-1}"
       },
       "volumes": [
         "${APP_DATA_DIR}/data/index:/data:ro"

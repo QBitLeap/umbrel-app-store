@@ -11,20 +11,20 @@
         "indexer",
         "ui"
       ],
-      "default": "0",
+      "default": "1",
       "options": [
         "0",
         "1"
       ],
-      "note": "Set 1 to index after checking Core, storage and power readiness."
+      "note": "Indexing starts automatically. Set 0 to pause it."
     }
   ],
   "category": "finance",
   "name": "qord Indexer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "tagline": "Independent read-only qord indexing",
-  "description": "Follow your selected Qbit Core instance and maintain a separate, persistent qord index. Indexing starts paused; enable INDEX_ENABLED in app settings when ready. Includes a browser status page and authenticated read API. Use the terminal for the qord wallet and inscriber. This is an amd64 package candidate.",
-  "releaseNotes": "Run the qord wallet and inscriber from the Umbrel terminal.",
+  "description": "Follow your selected Qbit Core instance and maintain a separate, persistent qord index. Indexing starts automatically when Core is available. Includes a browser status page and authenticated read API. Use the terminal for the qord wallet and inscriber. This is an amd64 package candidate.",
+  "releaseNotes": "Indexing starts automatically. Run the qord wallet and inscriber from the Umbrel terminal.",
   "developer": "QBitLeap",
   "website": "https://github.com/djh58/qord",
   "dependencies": [
@@ -33,7 +33,7 @@
   "repo": "https://github.com/QBitLeap/qord-umbrel",
   "support": "https://github.com/QBitLeap/qord-umbrel/issues",
   "port": 5103,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/qord-umbrel/da642b465c9459feeb53bd400bd50797e1c934e0/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/qord-umbrel/839284e94e8bf01047f9912f2016f1876d6736df/icon.svg",
   "gallery": [],
   "path": "",
   "defaultUsername": "",

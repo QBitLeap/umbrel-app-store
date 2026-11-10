@@ -23,27 +23,27 @@
       "services": [
         "core"
       ],
-      "default": "0",
+      "default": "1",
       "options": [
         "0",
         "1"
       ],
-      "note": "Enable local Core wallets for LEAP and qord terminal commands."
+      "note": "Local wallets are enabled for LEAP and qord terminal commands. Set 0 to disable them."
     }
   ],
   "category": "finance",
   "name": "Qbit Core \u00b7 Testnet4",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "tagline": "Your own Qbit node and authenticated indexer reads",
-  "description": "Run an independent Qbit Core node with a browser status page. Peer synchronization starts automatically. Pause or resume it with the dashboard switch. Local Core wallets are optional. Compatible indexers use authenticated read RPC. Each instance keeps its own network-specific data. This is an amd64 package candidate.",
-  "releaseNotes": "Configurable minute refresh, explicit sync progress, saved networking switch and automatic peer synchronization for new nodes.",
+  "description": "Run an independent Qbit Core node with a browser status page. Peer synchronization starts automatically. Pause or resume it with the dashboard switch. Local Core wallets are enabled by default. Compatible indexers use authenticated read RPC. Each instance keeps its own network-specific data. This is an amd64 package candidate.",
+  "releaseNotes": "Local wallets start automatically for LEAP and qord terminal commands.",
   "developer": "QBitLeap",
   "website": "https://github.com/Qbit-Org/qbit",
   "dependencies": [],
   "repo": "https://github.com/QBitLeap/qbit-core-umbrel",
   "support": "https://github.com/QBitLeap/qbit-core-umbrel/issues",
   "port": 5110,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/qbit-core-umbrel/674f0692c9d4614ebcd2fbda586570b3776ee028/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/qbit-core-umbrel/71b2684017f8b94c5c17fa1e22f6b574ca19b25d/icon.svg",
   "gallery": [],
   "path": "",
   "submitter": "QBitLeap"

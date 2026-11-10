@@ -7,7 +7,7 @@
       }
     },
     "transport": {
-      "image": "ghcr.io/qbitleap/qord-indexer@sha256:e993bb1f63f6d070b51ea0a3fc18901b87aefc68f6baab25c0d436ea870e9299",
+      "image": "ghcr.io/qbitleap/qord-indexer@sha256:effe4a0026a1f3326a78b22ebfe8177b1467a4f91039cf5e7e3a426bc51abd97",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -47,7 +47,7 @@
       }
     },
     "indexer": {
-      "image": "ghcr.io/qbitleap/qord-indexer@sha256:e993bb1f63f6d070b51ea0a3fc18901b87aefc68f6baab25c0d436ea870e9299",
+      "image": "ghcr.io/qbitleap/qord-indexer@sha256:effe4a0026a1f3326a78b22ebfe8177b1467a4f91039cf5e7e3a426bc51abd97",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -70,7 +70,7 @@
         "INDEX_PROTOCOL": "qord",
         "QBIT_CHAIN": "testnet4",
         "INDEX_LOCAL_TOKEN": "${APP_QBITLEAP_QORD_TESTNET4_LOCAL_TOKEN}",
-        "INDEX_ENABLED": "${INDEX_ENABLED:-0}"
+        "INDEX_ENABLED": "${INDEX_ENABLED:-1}"
       },
       "volumes": [
         "${APP_DATA_DIR}/data/index:/data"
@@ -86,7 +86,7 @@
       "stop_grace_period": "2m"
     },
     "ui": {
-      "image": "ghcr.io/qbitleap/qord-indexer@sha256:e993bb1f63f6d070b51ea0a3fc18901b87aefc68f6baab25c0d436ea870e9299",
+      "image": "ghcr.io/qbitleap/qord-indexer@sha256:effe4a0026a1f3326a78b22ebfe8177b1467a4f91039cf5e7e3a426bc51abd97",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -110,7 +110,7 @@
         "QBIT_CHAIN": "testnet4",
         "INDEX_LOCAL_TOKEN": "${APP_QBITLEAP_QORD_TESTNET4_LOCAL_TOKEN}",
         "INDEX_API_TOKEN": "${APP_QBITLEAP_QORD_TESTNET4_API_TOKEN}",
-        "INDEX_ENABLED": "${INDEX_ENABLED:-0}"
+        "INDEX_ENABLED": "${INDEX_ENABLED:-1}"
       },
       "volumes": [
         "${APP_DATA_DIR}/data/index:/data:ro"
