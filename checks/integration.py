@@ -136,6 +136,36 @@ print(json.dumps({'status':code,'body':value}))
             raise RuntimeError("Networking change was not saved and confirmed")
         return result
 
+    def check_terminal(self, protocol, core, broker, core_auth, data, transport, token):
+        chain = "mainnet" if self.chain == "main" else self.chain
+        env = {"QBIT_CHAIN": self.chain}
+        commands = {
+            "leap": 'leap wallet create terminal-leap --chain "$QBIT_CHAIN" --rpc-cookie /auth/.cookie >/dev/null'
+                    ' && leap receive --wallet terminal-leap --chain "$QBIT_CHAIN" --rpc-cookie /auth/.cookie',
+            "pins": "pins --help",
+            "qord": "qord wallet create >/dev/null && qord wallet receive",
+        }
+        if protocol == "leap":
+            env["LEAP_RPC_URL"] = "http://127.0.0.1:18443/"
+        if protocol == "qord":
+            env.update(QORD_CHAIN=chain, QORD_QBIT_RPC_URL="http://127.0.0.1:18443/",
+                       QORD_COOKIE_FILE="/auth/.cookie", QORD_CONFIG_DIR="/tmp", QORD_DATA_DIR="/data",
+                       QORD_SERVER_URL=f"http://{transport}:8787", QORD_SERVER_USERNAME="index",
+                       QORD_SERVER_PASSWORD=token)
+            if self.probe(broker, f"http://{transport}:8787/status")["status"] != 401:
+                raise RuntimeError("qord index accepted an unauthenticated request")
+        name = self.prefix + "-" + protocol + "-terminal"
+        self.containers.append(name)
+        options = [item for key, value in env.items() for item in ("--env", f"{key}={value}")]
+        self.docker.call(["run", "--init", "--name", name, *self.labels(),
+                          "--network", "container:" + core, "--read-only", "--user", "1000:1000",
+                          "--cap-drop", "ALL", "--security-opt", "no-new-privileges=true",
+                          "--tmpfs", "/tmp:rw,nosuid,nodev,noexec,size=64m,mode=1777",
+                          "--mount", f"type=volume,src={core_auth},dst=/auth,readonly",
+                          "--mount", f"type=volume,src={data},dst=/data", *options,
+                          "--entrypoint", "/bin/sh", self.images[protocol], "-ec", commands[protocol]],
+                         timeout=45)
+
     def restart_core(self, core, broker, ui):
         self.docker.call(["stop", "--time", "30", broker], timeout=40)
         self.docker.call(["stop", "--time", "30", core], timeout=40)
@@ -208,7 +238,7 @@ print(json.dumps({'status':code,'body':value}))
             core_read, core_ui = secrets.token_hex(32), secrets.token_hex(32)
             control = secrets.token_hex(32)
             core = self.start("core", self.images["core"], ["serve"],
-                              {"QBIT_CHAIN": self.chain, "QBIT_NETWORK_ACTIVE": "0"},
+                              {"QBIT_CHAIN": self.chain, "QBIT_NETWORK_ACTIVE": "0", "QBIT_WALLET_ENABLED": "1"},
                               volumes=[(core_data, "/data", False), (core_auth, "/auth", False), (control_data, "/settings", False)], memory="1536m")
             broker = self.start("broker", self.images["services"], ["broker"],
                                 {"QBIT_CHAIN": self.chain, "QBIT_READ_TOKEN": core_read, "QBIT_UI_TOKEN": core_ui,
@@ -319,9 +349,11 @@ print(json.dumps({'status':code,'body':value}))
                     "import sys;sys.path.insert(0,'/opt/index-app');from indexapp import bind_writer;from pathlib import Path;bind_writer(Path('/data')," + repr(protocol) + "," + repr(self.chain) + ")"], check=False)
                 if duplicate.returncode == 0:
                     raise RuntimeError("Duplicate writer lock was not enforced")
+                result["stage"] = protocol + " terminal"
+                self.check_terminal(protocol, core, broker, core_auth, data, transport, local)
                 result["protocols"][protocol] = {**status, "apiAuthenticationAccepted": True,
                                                 "restartAccepted": True, "duplicateWriterRefused": True,
-                                                "tipErrorCodePreserved": True}
+                                                "tipErrorCodePreserved": True, "terminalAccepted": True}
             result["passed"] = True
             result["stage"] = "all isolated app checks passed"
         except BaseException as error:

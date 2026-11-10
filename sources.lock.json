@@ -3,19 +3,19 @@
   "apps": {
     "qbit-core": {
       "repository": "https://github.com/QBitLeap/qbit-core-umbrel.git",
-      "commit": "cc09418941fbd3c5f9badef7a9147a4f9ed2b49e"
+      "commit": "15d0ebf64b93eecb148be43342267af8cb445b43"
     },
     "leap": {
       "repository": "https://github.com/QBitLeap/leap-umbrel.git",
-      "commit": "fdc97907c319ce49f58f9afa5ca4beb85f5bd62c"
+      "commit": "c5a6fafbd056602915b9559a20f5173c3490234a"
     },
     "pins": {
       "repository": "https://github.com/QBitLeap/pins-umbrel.git",
-      "commit": "fcbc21012c229e496bbd7bc8b34c742970cb11ba"
+      "commit": "56feaea1e9aa255a9af3a4533d1b5a10fcaa0d7e"
     },
     "qord": {
       "repository": "https://github.com/QBitLeap/qord-umbrel.git",
-      "commit": "43c8141d790fd49d3d3a19ee08b94a5c2c7d9ffa"
+      "commit": "da642b465c9459feeb53bd400bd50797e1c934e0"
     }
   }
 }
