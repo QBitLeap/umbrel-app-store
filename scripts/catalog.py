@@ -49,7 +49,7 @@ def accepted(receipt, images):
                 raise ValueError("Indexer isolation and lifecycle acceptance missing")
 
 
-def assemble(output, apps_root, sources, images, receipt, version="0.1.0-alpha.1"):
+def assemble(output, apps_root, sources, images, receipt, version="0.1.1"):
     validate_images(images)
     accepted(receipt, images)
     if re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+(?:[-.][a-z0-9][a-z0-9.-]*)?", version) is None:

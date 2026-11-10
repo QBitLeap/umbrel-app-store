@@ -9,6 +9,11 @@ import subprocess
 import sys
 import time
 import uuid
+from urllib.request import Request, ProxyHandler, build_opener
+
+CONTROL_HOST = "umbrel.example:5100"
+CONTROL_HEADERS = {"Host": CONTROL_HOST, "Origin": f"http://{CONTROL_HOST}",
+                   "X-Forwarded-Host": CONTROL_HOST, "X-Forwarded-Proto": "http", "X-Qbit-Control": "1"}
 
 GENESIS = {
  "main": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
@@ -40,6 +45,7 @@ class Fixture:
         self.prefix = "qbitleap-fixture-" + self.run_id[:12]
         self.containers, self.volumes = [], []
         self.network = None
+        self.ingress = None
 
     def labels(self):
         return ["--label", "qbitleap.run=" + self.run_id, "--label", "qbitleap.purpose=" + PURPOSE]
@@ -80,13 +86,13 @@ class Fixture:
             raise RuntimeError("Fixture isolation differs")
         return name
 
-    def probe(self, container, url, *, body=None, role=None, token_env=None):
+    def probe(self, container, url, *, body=None, role=None, token_env=None, headers=None):
         # Credentials are read inside the owned container and never printed.
         code = """import os,json,base64
 from urllib.request import Request,urlopen
 from urllib.error import HTTPError
 url=URL
-headers={'Content-Type':'application/json'}
+headers={'Content-Type':'application/json', **EXTRA_HEADERS}
 if ROLE is not None:
  headers['Authorization']='Basic '+base64.b64encode((ROLE+':'+os.environ[TOKEN_ENV]).encode()).decode()
 data=DATA
@@ -97,7 +103,7 @@ except HTTPError as response: code,raw=response.code,response.read(1048576)
 try:value=json.loads(raw)
 except Exception:value=None
 print(json.dumps({'status':code,'body':value}))
-""".replace("URL", repr(url)).replace("ROLE", repr(role)).replace("TOKEN_ENV", repr(token_env)).replace("DATA", repr(body))
+""".replace("URL", repr(url)).replace("ROLE", repr(role)).replace("TOKEN_ENV", repr(token_env)).replace("DATA", repr(body)).replace("EXTRA_HEADERS", repr(headers or {}))
         value = self.docker.call(["exec", "--user", "1000:1000", container, "python3", "-c", code], timeout=10)
         return json.loads(value.stdout)
 
@@ -120,21 +126,15 @@ print(json.dumps({'status':code,'body':value}))
         raise RuntimeError("Fixture readiness timed out: " + str(last)[:1000])
 
     def network_action(self, ui, enabled):
-        code = '''import json,os,http.cookiejar
-from urllib.request import Request,build_opener,HTTPCookieProcessor
-jar=http.cookiejar.CookieJar()
-opener=build_opener(HTTPCookieProcessor(jar))
-headers={'Content-Type':'application/json','Origin':'http://127.0.0.1:8080','X-Qbit-Control':'1'}
-def post(path,body,extra=None):
- request=Request('http://127.0.0.1:8080'+path,data=json.dumps(body).encode(),headers={**headers,**(extra or {})})
- with opener.open(request,timeout=15) as response:return json.load(response)
-session=post('/api/control/login',{'password':os.environ['QBIT_CONTROL_PASSWORD']})
-result=post('/api/control/network',{'enabled':ENABLED},{'X-Qbit-CSRF':session['csrf']})
-assert result['peerNetworkingEnabled'] is ENABLED and result['saved'] is True
-print(json.dumps({'network':result['network'],'peerNetworkingEnabled':result['peerNetworkingEnabled'],'saved':True}))
-'''.replace("ENABLED", repr(enabled))
-        value = self.docker.call(["exec", "--user", "1000:1000", ui, "python3", "-c", code], timeout=25)
-        return json.loads(value.stdout)
+        address = self.docker.inspect("container", ui)["NetworkSettings"]["Networks"][self.ingress]["IPAddress"]
+        request = Request(f"http://{address}:8080/api/control/network",
+                          data=json.dumps({"enabled": enabled}).encode(),
+                          headers={"Content-Type": "application/json", **CONTROL_HEADERS})
+        with build_opener(ProxyHandler({})).open(request, timeout=15) as response:
+            result = json.load(response)
+        if result.get("peerNetworkingEnabled") is not enabled or result.get("saved") is not True:
+            raise RuntimeError("Networking change was not saved and confirmed")
+        return result
 
     def restart_core(self, core, broker, ui):
         self.docker.call(["stop", "--time", "30", broker], timeout=40)
@@ -148,7 +148,7 @@ print(json.dumps({'network':result['network'],'peerNetworkingEnabled':result['pe
     def cleanup(self):
         errors = []
         groups = [("container", list(reversed(self.containers))), ("volume", list(reversed(self.volumes))),
-                  ("network", [self.network] if self.network else [])]
+                  ("network", [name for name in (self.ingress, self.network) if name])]
         for kind, names in groups:
             for name in names:
                 try:
@@ -206,7 +206,7 @@ print(json.dumps({'network':result['network'],'peerNetworkingEnabled':result['pe
                 raise RuntimeError("Fixture network permits external traffic")
             core_data, core_auth, control_data = self.volume("core-data"), self.volume("core-auth"), self.volume("core-settings")
             core_read, core_ui = secrets.token_hex(32), secrets.token_hex(32)
-            control, password = secrets.token_hex(32), secrets.token_hex(32)
+            control = secrets.token_hex(32)
             core = self.start("core", self.images["core"], ["serve"],
                               {"QBIT_CHAIN": self.chain, "QBIT_NETWORK_ACTIVE": "0"},
                               volumes=[(core_data, "/data", False), (core_auth, "/auth", False), (control_data, "/settings", False)], memory="1536m")
@@ -216,7 +216,13 @@ print(json.dumps({'network':result['network'],'peerNetworkingEnabled':result['pe
                                 share=core, volumes=[(core_auth, "/auth", True), (control_data, "/settings", False)], memory="1024m")
             ui = self.start("core-ui", self.images["services"], ["ui"],
                             {"QBIT_CHAIN": self.chain, "QBIT_READ_URL": "http://" + core + ":8081/", "QBIT_UI_TOKEN": core_ui,
-                             "QBIT_CONTROL_TOKEN": control, "QBIT_CONTROL_PASSWORD": password})
+                             "QBIT_CONTROL_TOKEN": control})
+            # Only the UI has a host-facing bridge. The Core fixture stays on
+            # the internal network throughout the switch and restart checks.
+            ingress = self.prefix + "-ingress"
+            self.docker.call(["network", "create", *self.labels(), ingress])
+            self.ingress = ingress
+            self.docker.call(["network", "connect", ingress, ui])
             query = {"jsonrpc": "2.0", "id": 1, "method": "getblockchaininfo", "params": []}
             result["stage"] = "Core read gateway initialization"
             node = self.wait(lambda: self.probe(broker, "http://127.0.0.1:8081/", body=query,
@@ -254,6 +260,10 @@ print(json.dumps({'network':result['network'],'peerNetworkingEnabled':result['pe
                 "import socket; s=socket.socket(); s.settimeout(2); code=s.connect_ex((" + repr(core) + ",18443)); s.close(); assert code != 0"])
             result["stage"] = "authenticated networking control and saved-choice restart"
             print("Checking authenticated networking switch and persistence on " + self.chain, flush=True)
+            direct = self.probe(ui, "http://127.0.0.1:8080/api/control/network",
+                                body={"enabled": True}, headers=CONTROL_HEADERS)
+            if direct["status"] != 403:
+                raise RuntimeError("Direct networking change with forwarded headers was not refused")
             # The Docker network is internal: enabling this fixture's peer switch
             # cannot connect it to external peers. No operational node is touched.
             self.network_action(ui, True)
