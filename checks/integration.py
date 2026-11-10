@@ -149,7 +149,7 @@ print(json.dumps({'status':code,'body':value}))
         if protocol == "leap":
             env["LEAP_RPC_URL"] = "http://127.0.0.1:18443/"
         if protocol == "qord":
-            env.update(QORD_CHAIN=chain, QORD_QBIT_RPC_URL="http://127.0.0.1:18443/",
+            env.update(QORD_CHAIN=chain, QORD_QBIT_RPC_URL="http://127.0.0.1:18443",
                        QORD_COOKIE_FILE="/auth/.cookie", QORD_CONFIG_DIR="/tmp", QORD_DATA_DIR="/data",
                        QORD_SERVER_URL=f"http://{transport}:8787", QORD_SERVER_USERNAME="index",
                        QORD_SERVER_PASSWORD=token)

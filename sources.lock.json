@@ -3,7 +3,7 @@
   "apps": {
     "qbit-core": {
       "repository": "https://github.com/QBitLeap/qbit-core-umbrel.git",
-      "commit": "15d0ebf64b93eecb148be43342267af8cb445b43"
+      "commit": "674f0692c9d4614ebcd2fbda586570b3776ee028"
     },
     "leap": {
       "repository": "https://github.com/QBitLeap/leap-umbrel.git",
