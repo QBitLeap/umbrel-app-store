@@ -142,7 +142,8 @@ print(json.dumps({'status':code,'body':value}))
         commands = {
             "leap": 'leap wallet create terminal-leap --chain "$QBIT_CHAIN" --rpc-cookie /auth/.cookie >/dev/null'
                     ' && leap receive --wallet terminal-leap --chain "$QBIT_CHAIN" --rpc-cookie /auth/.cookie',
-            "pins": "pins --help",
+            "pins": "printf '%s' '{\"issuerPublic\":\"" + "01" * 32 + "\"}' >/tmp/issuer.json"
+                    " && pins address --pub /tmp/issuer.json",
             "qord": "qord wallet create >/dev/null && qord wallet receive",
         }
         if protocol == "leap":
@@ -157,14 +158,16 @@ print(json.dumps({'status':code,'body':value}))
         name = self.prefix + "-" + protocol + "-terminal"
         self.containers.append(name)
         options = [item for key, value in env.items() for item in ("--env", f"{key}={value}")]
-        self.docker.call(["run", "--init", "--name", name, *self.labels(),
+        result = self.docker.call(["run", "--init", "--name", name, *self.labels(),
                           "--network", "container:" + core, "--read-only", "--user", "1000:1000",
                           "--cap-drop", "ALL", "--security-opt", "no-new-privileges=true",
                           "--tmpfs", "/tmp:rw,nosuid,nodev,noexec,size=64m,mode=1777",
                           "--mount", f"type=volume,src={core_auth},dst=/auth,readonly",
                           "--mount", f"type=volume,src={data},dst=/data", *options,
                           "--entrypoint", "/bin/sh", self.images[protocol], "-ec", commands[protocol]],
-                         timeout=45)
+                                  timeout=45)
+        if protocol == "pins" and f"{chain} funding address " not in result.stdout:
+            raise RuntimeError("PINS terminal did not select the requested network")
 
     def restart_core(self, core, broker, ui):
         self.docker.call(["stop", "--time", "30", broker], timeout=40)
