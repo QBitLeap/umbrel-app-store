@@ -29,7 +29,7 @@ class Docker:
 
 def fixture_mounts_only(mounts, volumes):
     return all((m.get("Type") == "volume" and m.get("Name") in volumes
-                and m.get("Destination") in {"/data", "/auth"})
+                and m.get("Destination") in {"/data", "/auth", "/settings"})
                or (m.get("Type") == "tmpfs" and m.get("Destination") == "/tmp")
                for m in mounts)
 
@@ -66,7 +66,7 @@ class Fixture:
         for key, value in environment.items():
             args += ["--env", key + "=" + value]
         for volume, target, readonly in volumes:
-            if volume not in self.volumes or target not in {"/data", "/auth"}:
+            if volume not in self.volumes or target not in {"/data", "/auth", "/settings"}:
                 raise RuntimeError("Unexpected fixture mount")
             args += ["--mount", "type=volume,src=" + volume + ",dst=" + target + (",readonly" if readonly else "")]
         self.containers.append(name)
@@ -118,6 +118,32 @@ print(json.dumps({'status':code,'body':value}))
                 last = str(error)
             time.sleep(1)
         raise RuntimeError("Fixture readiness timed out: " + str(last)[:1000])
+
+    def network_action(self, ui, enabled):
+        code = '''import json,os,http.cookiejar
+from urllib.request import Request,build_opener,HTTPCookieProcessor
+jar=http.cookiejar.CookieJar()
+opener=build_opener(HTTPCookieProcessor(jar))
+headers={'Content-Type':'application/json','Origin':'http://127.0.0.1:8080','X-Qbit-Control':'1'}
+def post(path,body,extra=None):
+ request=Request('http://127.0.0.1:8080'+path,data=json.dumps(body).encode(),headers={**headers,**(extra or {})})
+ with opener.open(request,timeout=15) as response:return json.load(response)
+session=post('/api/control/login',{'password':os.environ['QBIT_CONTROL_PASSWORD']})
+result=post('/api/control/network',{'enabled':ENABLED},{'X-Qbit-CSRF':session['csrf']})
+assert result['peerNetworkingEnabled'] is ENABLED and result['saved'] is True
+print(json.dumps({'network':result['network'],'peerNetworkingEnabled':result['peerNetworkingEnabled'],'saved':True}))
+'''.replace("ENABLED", repr(enabled))
+        value = self.docker.call(["exec", "--user", "1000:1000", ui, "python3", "-c", code], timeout=25)
+        return json.loads(value.stdout)
+
+    def restart_core(self, core, broker, ui):
+        self.docker.call(["stop", "--time", "30", broker], timeout=40)
+        self.docker.call(["stop", "--time", "30", core], timeout=40)
+        if self.docker.inspect("container", core)["State"].get("ExitCode") != 0:
+            raise RuntimeError("Core did not stop cleanly")
+        self.docker.call(["start", core])
+        self.docker.call(["start", broker])
+        return self.wait(lambda: self.probe(ui, "http://127.0.0.1:8080/api/status"), [core, broker, ui])["body"]
 
     def cleanup(self):
         errors = []
@@ -178,16 +204,19 @@ print(json.dumps({'status':code,'body':value}))
             self.docker.call(["network", "create", "--internal", *self.labels(), self.network])
             if not self.docker.inspect("network", self.network).get("Internal"):
                 raise RuntimeError("Fixture network permits external traffic")
-            core_data, core_auth = self.volume("core-data"), self.volume("core-auth")
+            core_data, core_auth, control_data = self.volume("core-data"), self.volume("core-auth"), self.volume("core-settings")
             core_read, core_ui = secrets.token_hex(32), secrets.token_hex(32)
+            control, password = secrets.token_hex(32), secrets.token_hex(32)
             core = self.start("core", self.images["core"], ["serve"],
                               {"QBIT_CHAIN": self.chain, "QBIT_NETWORK_ACTIVE": "0"},
-                              volumes=[(core_data, "/data", False), (core_auth, "/auth", False)], memory="1536m")
+                              volumes=[(core_data, "/data", False), (core_auth, "/auth", False), (control_data, "/settings", False)], memory="1536m")
             broker = self.start("broker", self.images["services"], ["broker"],
-                                {"QBIT_CHAIN": self.chain, "QBIT_READ_TOKEN": core_read, "QBIT_UI_TOKEN": core_ui},
-                                share=core, volumes=[(core_auth, "/auth", True)], memory="1024m")
+                                {"QBIT_CHAIN": self.chain, "QBIT_READ_TOKEN": core_read, "QBIT_UI_TOKEN": core_ui,
+                                 "QBIT_CONTROL_TOKEN": control, "QBIT_NETWORK_ACTIVE": "0"},
+                                share=core, volumes=[(core_auth, "/auth", True), (control_data, "/settings", False)], memory="1024m")
             ui = self.start("core-ui", self.images["services"], ["ui"],
-                            {"QBIT_CHAIN": self.chain, "QBIT_READ_URL": "http://" + core + ":8081/", "QBIT_UI_TOKEN": core_ui})
+                            {"QBIT_CHAIN": self.chain, "QBIT_READ_URL": "http://" + core + ":8081/", "QBIT_UI_TOKEN": core_ui,
+                             "QBIT_CONTROL_TOKEN": control, "QBIT_CONTROL_PASSWORD": password})
             query = {"jsonrpc": "2.0", "id": 1, "method": "getblockchaininfo", "params": []}
             result["stage"] = "Core read gateway initialization"
             node = self.wait(lambda: self.probe(broker, "http://127.0.0.1:8081/", body=query,
@@ -223,17 +252,19 @@ print(json.dumps({'status':code,'body':value}))
             no_cookie = self.docker.call(["exec", ui, "python3", "-c", "from pathlib import Path; assert not Path('/auth/.cookie').exists()"])
             raw_rpc = self.docker.call(["exec", ui, "python3", "-c",
                 "import socket; s=socket.socket(); s.settimeout(2); code=s.connect_ex((" + repr(core) + ",18443)); s.close(); assert code != 0"])
+            result["stage"] = "authenticated networking control and saved-choice restart"
+            print("Checking authenticated networking switch and persistence on " + self.chain, flush=True)
+            # The Docker network is internal: enabling this fixture's peer switch
+            # cannot connect it to external peers. No operational node is touched.
+            self.network_action(ui, True)
+            active = self.restart_core(core, broker, ui)
+            if active.get("peerNetworkingEnabled") is not True or active.get("connections") != 0:
+                raise RuntimeError("Saved networking choice did not survive restart in the isolated fixture")
+            self.network_action(ui, False)
             result["stage"] = "Core and dependent gateway restart"
             # The broker shares Core's network namespace. Recreate that attachment
             # after restarting its owner, as the app's compose restart dependency does.
-            self.docker.call(["stop", "--time", "30", broker], timeout=40)
-            self.docker.call(["stop", "--time", "30", core], timeout=40)
-            if self.docker.inspect("container", core)["State"].get("ExitCode") != 0:
-                raise RuntimeError("Core did not stop cleanly")
-            self.docker.call(["start", core])
-            self.docker.call(["start", broker])
-            restarted = self.wait(lambda: self.probe(ui, "http://127.0.0.1:8080/api/status"),
-                                  [core, broker, ui])["body"]
+            restarted = self.restart_core(core, broker, ui)
             if (restarted.get("network") != self.chain or restarted.get("blocks") != 0
                     or restarted.get("bestBlockHash") != GENESIS[self.chain]
                     or restarted.get("peerNetworkingEnabled")):
@@ -241,7 +272,8 @@ print(json.dumps({'status':code,'body':value}))
             result["core"] = {**state, "unauthenticatedReadRejected": True,
                               "publicationRpcRejected": True, "uiHasNoCoreCookie": True,
                               "rawRpcNotReachableFromNeighbor": True, "restartAccepted": True,
-                              "tipErrorCodePreserved": True}
+                              "tipErrorCodePreserved": True, "networkingControlAccepted": True,
+                              "networkingChoiceSurvivedRestart": True, "finalFixtureNetworkingDisabled": True}
             for protocol in ("leap", "pins", "qord"):
                 result["stage"] = protocol + " initialization, API and restart"
                 print("Checking isolated " + self.chain + " " + protocol + " app", flush=True)
@@ -253,7 +285,7 @@ print(json.dumps({'status':code,'body':value}))
                 writer = self.start(protocol + "-indexer", self.images[protocol], ["indexer"],
                     {**common, "INDEX_ENABLED": "1"}, share=transport, volumes=[(data, "/data", False)], memory="2048m")
                 front = self.start(protocol + "-ui", self.images[protocol], ["ui"],
-                    {**common, "INDEX_API_TOKEN": api}, share=transport, volumes=[(data, "/data", True)])
+                    {**common, "INDEX_API_TOKEN": api, "INDEX_ENABLED": "1"}, share=transport, volumes=[(data, "/data", True)])
                 status = self.wait(lambda: self.probe(front, "http://127.0.0.1:8080/v1/status", role="reader", token_env="INDEX_API_TOKEN"),
                                    [transport, writer, front], timeout=100)["body"]
                 if status.get("network") != self.chain or status.get("transactionRoutingAccepted"):
@@ -317,7 +349,7 @@ def main():
   if (labels.get('org.opencontainers.image.revision')!=source['commit'] or
       labels.get('org.opencontainers.image.source')!=source['repository'].removesuffix('.git')):
    raise ValueError('Published image does not identify the pinned app source')
- result={'passed':False,'images':images,'networks':{},'productionServicesStarted':False,'operationalDataMounted':False,'peerNetworkingEnabled':False}
+ result={'passed':False,'images':images,'networks':{},'productionServicesStarted':False,'operationalDataMounted':False,'peerNetworkingEnabled':False,'externalPeerNetworkingEnabled':False,'internalFixturePeerSwitchTested':True}
  try:
   for chain in GENESIS:
    result['networks'][chain]=Fixture(docker,images,chain).run()

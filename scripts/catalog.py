@@ -37,7 +37,8 @@ def accepted(receipt, images):
             raise ValueError("Fixture checks and owned cleanup must pass")
         if any(value.get("core", {}).get(k) is not True for k in
                ("restartAccepted", "unauthenticatedReadRejected", "publicationRpcRejected",
-                "uiHasNoCoreCookie", "rawRpcNotReachableFromNeighbor", "tipErrorCodePreserved")):
+                "uiHasNoCoreCookie", "rawRpcNotReachableFromNeighbor", "tipErrorCodePreserved",
+                "networkingControlAccepted", "networkingChoiceSurvivedRestart", "finalFixtureNetworkingDisabled")):
             raise ValueError("Core isolation and lifecycle acceptance missing")
         protocols = value.get("protocols", {})
         if set(protocols) != {"leap", "pins", "qord"}:

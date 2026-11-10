@@ -25,7 +25,8 @@ def receipt():
     for chain in ("main", "testnet4"):
         value["networks"][chain] = {"passed": True, "fixtureCleanupComplete": True,
             "core": {k: True for k in ("restartAccepted", "unauthenticatedReadRejected", "publicationRpcRejected",
-                                       "uiHasNoCoreCookie", "rawRpcNotReachableFromNeighbor", "tipErrorCodePreserved")},
+                                       "uiHasNoCoreCookie", "rawRpcNotReachableFromNeighbor", "tipErrorCodePreserved",
+                                       "networkingControlAccepted", "networkingChoiceSurvivedRestart", "finalFixtureNetworkingDisabled")},
             "protocols": {role: {k: True for k in ("apiAuthenticationAccepted", "restartAccepted",
                                                   "duplicateWriterRefused", "tipErrorCodePreserved")}
                           for role in ("leap", "pins", "qord")}}
@@ -54,6 +55,10 @@ class CatalogTests(unittest.TestCase):
             value["networks"]["testnet4"][key] = False
             with self.assertRaises(ValueError):
                 accepted(value, images())
+        value = receipt()
+        value["networks"]["main"]["core"]["networkingChoiceSurvivedRestart"] = False
+        with self.assertRaises(ValueError):
+            accepted(value, images())
         value = receipt()
         value["networks"]["main"]["protocols"]["qord"]["tipErrorCodePreserved"] = False
         with self.assertRaises(ValueError):
