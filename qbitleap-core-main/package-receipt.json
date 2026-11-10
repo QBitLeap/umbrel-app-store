@@ -1,0 +1,18 @@
+{
+  "format": "qbit-core-app-package-v1",
+  "appId": "qbitleap-core-main",
+  "chain": "main",
+  "coreImage": "ghcr.io/qbitleap/qbit-core@sha256:ceeb21acd4afb70ccb7a38d6951b2db4b9e433d2027f2d7eac127dc9ebc039d1",
+  "serviceImage": "ghcr.io/qbitleap/qbit-core-services@sha256:35acdd38dcf303e5f8fbb691206bf9550d93b3de9629bdf32deec8e36c8ccfaa",
+  "localFixtureImages": false,
+  "fullUmbrelAppAccepted": false,
+  "publicImagePublicationAccepted": false,
+  "files": {
+    "data/auth/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/core/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docker-compose.yml": "9f2c6f3b580dbfef0bc5aa4592cd930fcc96d3d734477cd3bb2d6d1e3563fcd4",
+    "exports.sh": "7a6ca7b86a93912a04363127ef9f99853b530812bec63601a0c8d0bb69325309",
+    "icon.svg": "6a05504ddbd79dc12ea6b46eeab36a6b9aca23ce5bd33b8e94bb9fedf419e0b1",
+    "umbrel-app.yml": "fcf715d131d9e82609382cccd433775524eef47b70177f67100b1e1a960476a1"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "manifestVersion": 2.0,
+  "id": "qbitleap-pins-testnet4",
+  "storage": {
+    "dataRoot": "data"
+  },
+  "environment": [
+    {
+      "name": "INDEX_ENABLED",
+      "services": [
+        "indexer"
+      ],
+      "default": "0",
+      "note": "Set 1 to index after checking Core, storage and power readiness."
+    }
+  ],
+  "category": "finance",
+  "name": "PINS Indexer \u00b7 Testnet4",
+  "version": "0.1.0-alpha.1",
+  "tagline": "Independent read-only PINS indexing",
+  "description": "Follow your selected Qbit Core instance and maintain a separate, persistent PINS index. Indexing starts paused; enable INDEX_ENABLED in app settings when ready. Includes a browser status page and authenticated read API. No wallets, signing or broadcasting. This is an amd64 package candidate.",
+  "releaseNotes": "",
+  "developer": "QBitLeap",
+  "website": "https://github.com/P2MR-PINS-Protocol/pins",
+  "dependencies": [
+    "qbitleap-core-testnet4"
+  ],
+  "repo": "https://github.com/QBitLeap/pins-umbrel",
+  "support": "https://github.com/QBitLeap/pins-umbrel/issues",
+  "port": 5112,
+  "icon": "https://raw.githubusercontent.com/QBitLeap/pins-umbrel/3c772cbb58592a83e943a42326ef99ebe367e32f/icon.svg",
+  "gallery": [],
+  "path": "",
+  "defaultUsername": "",
+  "defaultPassword": "",
+  "submitter": "QBitLeap"
+}

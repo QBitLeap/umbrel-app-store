@@ -1,0 +1,35 @@
+{
+  "manifestVersion": 2.0,
+  "id": "qbitleap-core-main",
+  "storage": {
+    "dataRoot": "data"
+  },
+  "environment": [
+    {
+      "name": "QBIT_NETWORK_ACTIVE",
+      "services": [
+        "core"
+      ],
+      "default": "0",
+      "note": "0 keeps peer networking off. Set 1 to synchronize after checking storage and power readiness."
+    }
+  ],
+  "category": "finance",
+  "name": "Qbit Core",
+  "version": "0.1.0-alpha.1",
+  "tagline": "Your own Qbit node and authenticated indexer reads",
+  "description": "Run an independent Qbit Core node with a browser status page. Peer networking starts disabled; enable it in app settings to synchronize. Wallets are disabled. Compatible indexers use authenticated read RPC; Core cookies stay private. Each instance keeps its own network-specific data. This is an amd64 package candidate.",
+  "releaseNotes": "",
+  "developer": "QBitLeap",
+  "website": "https://github.com/Qbit-Org/qbit",
+  "dependencies": [],
+  "repo": "https://github.com/QBitLeap/qbit-core-umbrel",
+  "support": "https://github.com/QBitLeap/qbit-core-umbrel/issues",
+  "port": 5100,
+  "icon": "https://raw.githubusercontent.com/QBitLeap/qbit-core-umbrel/9043a2d25ae80bd7e8b17fbee0bf84cd2a18df37/icon.svg",
+  "gallery": [],
+  "path": "",
+  "defaultUsername": "",
+  "defaultPassword": "",
+  "submitter": "QBitLeap"
+}

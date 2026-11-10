@@ -1,0 +1,18 @@
+{
+  "format": "standalone-indexer-app-package-v1",
+  "protocol": "pins",
+  "appId": "qbitleap-pins-testnet4",
+  "coreAppId": "qbitleap-core-testnet4",
+  "chain": "testnet4",
+  "image": "ghcr.io/qbitleap/pins-indexer@sha256:fac4f0f293f0d5cccaba99eb49871d592f2b6a762e892dd69f8881b0cde5c494",
+  "localFixtureImages": false,
+  "fullUmbrelAppAccepted": false,
+  "publicImagePublicationAccepted": false,
+  "files": {
+    "data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docker-compose.yml": "6ecbabf5f39c9134c4b1b66cc3b8aeee84ad42508b2f772a15cc4a85eef3aff9",
+    "exports.sh": "b9b49a848e12067c8dcaff678c725cda7fb022babadd674b23d260e06c8bf253",
+    "icon.svg": "2e94a26df567e6bbf489f857dedbe9a1bf85205b794312b73b95e87eadffec06",
+    "umbrel-app.yml": "00fb6fb076d69938985079a07377f978f39bdb1539c82e358d9de73fd38d53e2"
+  }
+}

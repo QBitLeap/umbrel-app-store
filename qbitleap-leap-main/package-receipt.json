@@ -1,0 +1,18 @@
+{
+  "format": "standalone-indexer-app-package-v1",
+  "protocol": "leap",
+  "appId": "qbitleap-leap-main",
+  "coreAppId": "qbitleap-core-main",
+  "chain": "main",
+  "image": "ghcr.io/qbitleap/leap-indexer@sha256:f7ff2fae9fd21955d578e74f118ea95cbb573a31e3421794fc7ad8f2517246a2",
+  "localFixtureImages": false,
+  "fullUmbrelAppAccepted": false,
+  "publicImagePublicationAccepted": false,
+  "files": {
+    "data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docker-compose.yml": "72710590eb2560215605a12de3b22a713f18541062f0978eb6d964e1bb9cf9ee",
+    "exports.sh": "e867b483e0408cc9401a53984d01a7bc316393c3db20369c8d87aa6184590635",
+    "icon.svg": "269437c3a8105cb75ea0307809c02dd3419808051ab0118e630d861b5429e509",
+    "umbrel-app.yml": "7a16a3e8959753551f4479129c1f2a6529819a1162c0599cda5fcb725230b0ff"
+  }
+}

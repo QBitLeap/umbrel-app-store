@@ -1,0 +1,148 @@
+{
+  "services": {
+    "app_proxy": {
+      "environment": {
+        "APP_HOST": "qbitleap-core-testnet4_ui_1",
+        "APP_PORT": 8080
+      }
+    },
+    "core": {
+      "user": "1000:1000",
+      "restart": "on-failure",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 128,
+      "init": true,
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      ],
+      "image": "ghcr.io/qbitleap/qbit-core@sha256:ceeb21acd4afb70ccb7a38d6951b2db4b9e433d2027f2d7eac127dc9ebc039d1",
+      "command": [
+        "serve"
+      ],
+      "environment": {
+        "QBIT_CHAIN": "testnet4",
+        "QBIT_NETWORK_ACTIVE": "${QBIT_NETWORK_ACTIVE:-0}"
+      },
+      "volumes": [
+        "${APP_DATA_DIR}/data/core:/data",
+        "${APP_DATA_DIR}/data/auth:/auth"
+      ],
+      "stop_grace_period": "2m",
+      "mem_limit": "1536m",
+      "cpus": 2,
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "/opt/qbit/bin/qbit-cli",
+          "-chain=testnet4",
+          "-datadir=/data",
+          "-rpcport=18443",
+          "-rpccookiefile=/auth/.cookie",
+          "getblockchaininfo"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 12,
+        "start_period": "30s"
+      }
+    },
+    "broker": {
+      "user": "1000:1000",
+      "restart": "on-failure",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 128,
+      "init": true,
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      ],
+      "image": "ghcr.io/qbitleap/qbit-core-services@sha256:35acdd38dcf303e5f8fbb691206bf9550d93b3de9629bdf32deec8e36c8ccfaa",
+      "command": [
+        "broker"
+      ],
+      "network_mode": "service:core",
+      "mem_limit": "1024m",
+      "cpus": 2,
+      "environment": {
+        "QBIT_CHAIN": "testnet4",
+        "QBIT_READ_TOKEN": "${APP_QBITLEAP_CORE_TESTNET4_READ_TOKEN}",
+        "QBIT_UI_TOKEN": "${APP_QBITLEAP_CORE_TESTNET4_UI_TOKEN}"
+      },
+      "volumes": [
+        "${APP_DATA_DIR}/data/auth:/auth:ro"
+      ],
+      "depends_on": {
+        "core": {
+          "condition": "service_healthy",
+          "restart": true
+        }
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "from urllib.request import urlopen; urlopen('http://127.0.0.1:8081/healthz',timeout=2).close()"
+        ],
+        "interval": "15s",
+        "timeout": "4s",
+        "retries": 4
+      }
+    },
+    "ui": {
+      "user": "1000:1000",
+      "restart": "on-failure",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 128,
+      "init": true,
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      ],
+      "image": "ghcr.io/qbitleap/qbit-core-services@sha256:35acdd38dcf303e5f8fbb691206bf9550d93b3de9629bdf32deec8e36c8ccfaa",
+      "command": [
+        "ui"
+      ],
+      "mem_limit": "128m",
+      "cpus": 0.5,
+      "environment": {
+        "QBIT_CHAIN": "testnet4",
+        "QBIT_READ_URL": "${APP_QBITLEAP_CORE_TESTNET4_READ_URL}",
+        "QBIT_UI_TOKEN": "${APP_QBITLEAP_CORE_TESTNET4_UI_TOKEN}"
+      },
+      "depends_on": {
+        "broker": {
+          "condition": "service_healthy",
+          "restart": true
+        }
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "from urllib.request import urlopen; urlopen('http://127.0.0.1:8080/healthz',timeout=2).close()"
+        ],
+        "interval": "15s",
+        "timeout": "4s",
+        "retries": 4
+      }
+    }
+  }
+}

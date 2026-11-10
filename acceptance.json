@@ -1,0 +1,183 @@
+{
+  "images": {
+    "core": "ghcr.io/qbitleap/qbit-core@sha256:ceeb21acd4afb70ccb7a38d6951b2db4b9e433d2027f2d7eac127dc9ebc039d1",
+    "leap": "ghcr.io/qbitleap/leap-indexer@sha256:f7ff2fae9fd21955d578e74f118ea95cbb573a31e3421794fc7ad8f2517246a2",
+    "pins": "ghcr.io/qbitleap/pins-indexer@sha256:fac4f0f293f0d5cccaba99eb49871d592f2b6a762e892dd69f8881b0cde5c494",
+    "qord": "ghcr.io/qbitleap/qord-indexer@sha256:c6e25816a32c50fc5fcb199805f99c414f60ea34fefcf27639fc8e1a33ad1022",
+    "services": "ghcr.io/qbitleap/qbit-core-services@sha256:35acdd38dcf303e5f8fbb691206bf9550d93b3de9629bdf32deec8e36c8ccfaa"
+  },
+  "networks": {
+    "main": {
+      "chain": "main",
+      "cleanupErrors": [],
+      "core": {
+        "bestBlockHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
+        "blocks": 0,
+        "chainAndIndexReady": false,
+        "connections": 0,
+        "headers": 0,
+        "initialBlockDownload": true,
+        "network": "main",
+        "peerNetworkingEnabled": false,
+        "publicationRpcRejected": true,
+        "rawRpcNotReachableFromNeighbor": true,
+        "restartAccepted": true,
+        "tipErrorCodePreserved": true,
+        "transactionRoutingAccepted": false,
+        "txindexSynced": true,
+        "uiHasNoCoreCookie": true,
+        "unauthenticatedReadRejected": true,
+        "verificationProgress": 5.874691652121909e-06
+      },
+      "coreBeforeRestart": {
+        "bestBlockHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
+        "blocks": 0,
+        "chainAndIndexReady": false,
+        "connections": 0,
+        "headers": 0,
+        "initialBlockDownload": true,
+        "network": "main",
+        "peerNetworkingEnabled": false,
+        "transactionRoutingAccepted": false,
+        "txindexSynced": true,
+        "verificationProgress": 5.874691652121909e-06
+      },
+      "fixtureCleanupComplete": true,
+      "passed": true,
+      "protocols": {
+        "leap": {
+          "apiAuthenticationAccepted": true,
+          "app": "LEAP",
+          "duplicateWriterRefused": true,
+          "indexHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
+          "indexHeight": 0,
+          "items": 0,
+          "network": "main",
+          "nodeHeight": 0,
+          "observedSynchronized": false,
+          "restartAccepted": true,
+          "tipErrorCodePreserved": true,
+          "transactionRoutingAccepted": false
+        },
+        "pins": {
+          "apiAuthenticationAccepted": true,
+          "app": "PINS",
+          "duplicateWriterRefused": true,
+          "indexHash": null,
+          "indexHeight": -1,
+          "items": 0,
+          "network": "main",
+          "nodeHeight": 0,
+          "observedSynchronized": false,
+          "restartAccepted": true,
+          "tipErrorCodePreserved": true,
+          "transactionRoutingAccepted": false
+        },
+        "qord": {
+          "apiAuthenticationAccepted": true,
+          "app": "qord",
+          "duplicateWriterRefused": true,
+          "indexHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
+          "indexHeight": 0,
+          "items": 0,
+          "network": "main",
+          "nodeHeight": 0,
+          "observedSynchronized": false,
+          "restartAccepted": true,
+          "tipErrorCodePreserved": true,
+          "transactionRoutingAccepted": false
+        }
+      },
+      "runId": "70216264741a4646a3a576579b6f4c6d",
+      "stage": "all isolated app checks passed"
+    },
+    "testnet4": {
+      "chain": "testnet4",
+      "cleanupErrors": [],
+      "core": {
+        "bestBlockHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
+        "blocks": 0,
+        "chainAndIndexReady": false,
+        "connections": 0,
+        "headers": 0,
+        "initialBlockDownload": true,
+        "network": "testnet4",
+        "peerNetworkingEnabled": false,
+        "publicationRpcRejected": true,
+        "rawRpcNotReachableFromNeighbor": true,
+        "restartAccepted": true,
+        "tipErrorCodePreserved": true,
+        "transactionRoutingAccepted": false,
+        "txindexSynced": true,
+        "uiHasNoCoreCookie": true,
+        "unauthenticatedReadRejected": true,
+        "verificationProgress": 4.746948483504235e-06
+      },
+      "coreBeforeRestart": {
+        "bestBlockHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
+        "blocks": 0,
+        "chainAndIndexReady": false,
+        "connections": 0,
+        "headers": 0,
+        "initialBlockDownload": true,
+        "network": "testnet4",
+        "peerNetworkingEnabled": false,
+        "transactionRoutingAccepted": false,
+        "txindexSynced": true,
+        "verificationProgress": 4.746948483504235e-06
+      },
+      "fixtureCleanupComplete": true,
+      "passed": true,
+      "protocols": {
+        "leap": {
+          "apiAuthenticationAccepted": true,
+          "app": "LEAP",
+          "duplicateWriterRefused": true,
+          "indexHash": null,
+          "indexHeight": -1,
+          "items": 0,
+          "network": "testnet4",
+          "nodeHeight": 0,
+          "observedSynchronized": false,
+          "restartAccepted": true,
+          "tipErrorCodePreserved": true,
+          "transactionRoutingAccepted": false
+        },
+        "pins": {
+          "apiAuthenticationAccepted": true,
+          "app": "PINS",
+          "duplicateWriterRefused": true,
+          "indexHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
+          "indexHeight": 0,
+          "items": 0,
+          "network": "testnet4",
+          "nodeHeight": 0,
+          "observedSynchronized": false,
+          "restartAccepted": true,
+          "tipErrorCodePreserved": true,
+          "transactionRoutingAccepted": false
+        },
+        "qord": {
+          "apiAuthenticationAccepted": true,
+          "app": "qord",
+          "duplicateWriterRefused": true,
+          "indexHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
+          "indexHeight": 0,
+          "items": 0,
+          "network": "testnet4",
+          "nodeHeight": 0,
+          "observedSynchronized": false,
+          "restartAccepted": true,
+          "tipErrorCodePreserved": true,
+          "transactionRoutingAccepted": false
+        }
+      },
+      "runId": "ffac792f9488444b8399ae8916d95a92",
+      "stage": "all isolated app checks passed"
+    }
+  },
+  "operationalDataMounted": false,
+  "passed": true,
+  "peerNetworkingEnabled": false,
+  "productionServicesStarted": false
+}

@@ -1,0 +1,127 @@
+{
+  "services": {
+    "app_proxy": {
+      "environment": {
+        "APP_HOST": "qbitleap-pins-testnet4_transport_1",
+        "APP_PORT": 8080
+      }
+    },
+    "transport": {
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:fac4f0f293f0d5cccaba99eb49871d592f2b6a762e892dd69f8881b0cde5c494",
+      "user": "1000:1000",
+      "init": true,
+      "restart": "on-failure",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 256,
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,noexec,size=64m,mode=1777"
+      ],
+      "command": [
+        "transport"
+      ],
+      "mem_limit": "1024m",
+      "cpus": 2,
+      "environment": {
+        "INDEX_PROTOCOL": "pins",
+        "QBIT_CHAIN": "testnet4",
+        "INDEX_LOCAL_TOKEN": "${APP_QBITLEAP_PINS_TESTNET4_LOCAL_TOKEN}",
+        "INDEX_CORE_READ_URL": "${APP_QBITLEAP_CORE_TESTNET4_READ_URL}",
+        "INDEX_CORE_READ_TOKEN": "${APP_QBITLEAP_CORE_TESTNET4_READ_TOKEN}"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python3",
+          "-c",
+          "from urllib.request import urlopen; urlopen('http://127.0.0.1:8081/healthz',timeout=2).close()"
+        ],
+        "interval": "10s",
+        "timeout": "4s",
+        "retries": 6
+      }
+    },
+    "indexer": {
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:fac4f0f293f0d5cccaba99eb49871d592f2b6a762e892dd69f8881b0cde5c494",
+      "user": "1000:1000",
+      "init": true,
+      "restart": "on-failure",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 256,
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,noexec,size=64m,mode=1777"
+      ],
+      "command": [
+        "indexer"
+      ],
+      "network_mode": "service:transport",
+      "environment": {
+        "INDEX_PROTOCOL": "pins",
+        "QBIT_CHAIN": "testnet4",
+        "INDEX_LOCAL_TOKEN": "${APP_QBITLEAP_PINS_TESTNET4_LOCAL_TOKEN}",
+        "INDEX_ENABLED": "${INDEX_ENABLED:-0}"
+      },
+      "volumes": [
+        "${APP_DATA_DIR}/data/index:/data"
+      ],
+      "mem_limit": "2048m",
+      "cpus": 2,
+      "depends_on": {
+        "transport": {
+          "condition": "service_healthy",
+          "restart": true
+        }
+      },
+      "stop_grace_period": "2m"
+    },
+    "ui": {
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:fac4f0f293f0d5cccaba99eb49871d592f2b6a762e892dd69f8881b0cde5c494",
+      "user": "1000:1000",
+      "init": true,
+      "restart": "on-failure",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 256,
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,noexec,size=64m,mode=1777"
+      ],
+      "command": [
+        "ui"
+      ],
+      "network_mode": "service:transport",
+      "environment": {
+        "INDEX_PROTOCOL": "pins",
+        "QBIT_CHAIN": "testnet4",
+        "INDEX_LOCAL_TOKEN": "${APP_QBITLEAP_PINS_TESTNET4_LOCAL_TOKEN}",
+        "INDEX_API_TOKEN": "${APP_QBITLEAP_PINS_TESTNET4_API_TOKEN}"
+      },
+      "volumes": [
+        "${APP_DATA_DIR}/data/index:/data:ro"
+      ],
+      "mem_limit": "256m",
+      "cpus": 1,
+      "depends_on": {
+        "transport": {
+          "condition": "service_healthy",
+          "restart": true
+        }
+      }
+    }
+  }
+}
