@@ -5,6 +5,11 @@ Umbrel apps. Each app keeps its source and image release workflow in its own
 QBitLeap repository. Initial packages target Linux amd64 and umbrelOS 2.0+.
 The first downloadable catalog has not been published yet.
 
+App sources: [Qbit Core](https://github.com/QBitLeap/qbit-core-umbrel),
+[LEAP](https://github.com/QBitLeap/leap-umbrel),
+[PINS](https://github.com/QBitLeap/pins-umbrel) and
+[qord](https://github.com/QBitLeap/qord-umbrel).
+
 ## Release flow
 
 1. Review and publish the pinned app/protocol source repositories.
