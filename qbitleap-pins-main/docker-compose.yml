@@ -7,7 +7,7 @@
       }
     },
     "transport": {
-      "image": "ghcr.io/qbitleap/pins-indexer@sha256:fac4f0f293f0d5cccaba99eb49871d592f2b6a762e892dd69f8881b0cde5c494",
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:2750b893c496671158461dcc88d9bb67e821576e8c4acfb428e592a9a0790679",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -47,7 +47,7 @@
       }
     },
     "indexer": {
-      "image": "ghcr.io/qbitleap/pins-indexer@sha256:fac4f0f293f0d5cccaba99eb49871d592f2b6a762e892dd69f8881b0cde5c494",
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:2750b893c496671158461dcc88d9bb67e821576e8c4acfb428e592a9a0790679",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -86,7 +86,7 @@
       "stop_grace_period": "2m"
     },
     "ui": {
-      "image": "ghcr.io/qbitleap/pins-indexer@sha256:fac4f0f293f0d5cccaba99eb49871d592f2b6a762e892dd69f8881b0cde5c494",
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:2750b893c496671158461dcc88d9bb67e821576e8c4acfb428e592a9a0790679",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -109,7 +109,8 @@
         "INDEX_PROTOCOL": "pins",
         "QBIT_CHAIN": "main",
         "INDEX_LOCAL_TOKEN": "${APP_QBITLEAP_PINS_MAIN_LOCAL_TOKEN}",
-        "INDEX_API_TOKEN": "${APP_QBITLEAP_PINS_MAIN_API_TOKEN}"
+        "INDEX_API_TOKEN": "${APP_QBITLEAP_PINS_MAIN_API_TOKEN}",
+        "INDEX_ENABLED": "${INDEX_ENABLED:-0}"
       },
       "volumes": [
         "${APP_DATA_DIR}/data/index:/data:ro"

@@ -8,18 +8,23 @@
     {
       "name": "INDEX_ENABLED",
       "services": [
-        "indexer"
+        "indexer",
+        "ui"
       ],
       "default": "0",
+      "options": [
+        "0",
+        "1"
+      ],
       "note": "Set 1 to index after checking Core, storage and power readiness."
     }
   ],
   "category": "finance",
   "name": "qord Indexer",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "tagline": "Independent read-only qord indexing",
   "description": "Follow your selected Qbit Core instance and maintain a separate, persistent qord index. Indexing starts paused; enable INDEX_ENABLED in app settings when ready. Includes a browser status page and authenticated read API. No wallets, signing or broadcasting. This is an amd64 package candidate.",
-  "releaseNotes": "",
+  "releaseNotes": "Configurable dashboard refresh in minutes, one-minute minimum, and clearer paused/index-height status.",
   "developer": "QBitLeap",
   "website": "https://github.com/djh58/qord",
   "dependencies": [
@@ -28,7 +33,7 @@
   "repo": "https://github.com/QBitLeap/qord-umbrel",
   "support": "https://github.com/QBitLeap/qord-umbrel/issues",
   "port": 5103,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/qord-umbrel/3706c8884c1e4242f491093177fd2f4780e1c037/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/qord-umbrel/43c8141d790fd49d3d3a19ee08b94a5c2c7d9ffa/icon.svg",
   "gallery": [],
   "path": "",
   "defaultUsername": "",

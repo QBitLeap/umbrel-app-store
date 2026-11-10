@@ -8,18 +8,23 @@
     {
       "name": "INDEX_ENABLED",
       "services": [
-        "indexer"
+        "indexer",
+        "ui"
       ],
       "default": "0",
+      "options": [
+        "0",
+        "1"
+      ],
       "note": "Set 1 to index after checking Core, storage and power readiness."
     }
   ],
   "category": "finance",
   "name": "PINS Indexer",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "tagline": "Independent read-only PINS indexing",
   "description": "Follow your selected Qbit Core instance and maintain a separate, persistent PINS index. Indexing starts paused; enable INDEX_ENABLED in app settings when ready. Includes a browser status page and authenticated read API. No wallets, signing or broadcasting. This is an amd64 package candidate.",
-  "releaseNotes": "",
+  "releaseNotes": "Configurable dashboard refresh in minutes, one-minute minimum, and clearer paused/index-height status.",
   "developer": "QBitLeap",
   "website": "https://github.com/P2MR-PINS-Protocol/pins",
   "dependencies": [
@@ -28,7 +33,7 @@
   "repo": "https://github.com/QBitLeap/pins-umbrel",
   "support": "https://github.com/QBitLeap/pins-umbrel/issues",
   "port": 5102,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/pins-umbrel/3c772cbb58592a83e943a42326ef99ebe367e32f/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/pins-umbrel/fcbc21012c229e496bbd7bc8b34c742970cb11ba/icon.svg",
   "gallery": [],
   "path": "",
   "defaultUsername": "",

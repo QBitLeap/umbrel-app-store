@@ -7,7 +7,7 @@
       }
     },
     "transport": {
-      "image": "ghcr.io/qbitleap/qord-indexer@sha256:c6e25816a32c50fc5fcb199805f99c414f60ea34fefcf27639fc8e1a33ad1022",
+      "image": "ghcr.io/qbitleap/qord-indexer@sha256:7d84bbf4fdf21b4929afb9645e83208ff3ed9e32bbee03594e2812a38959b837",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -47,7 +47,7 @@
       }
     },
     "indexer": {
-      "image": "ghcr.io/qbitleap/qord-indexer@sha256:c6e25816a32c50fc5fcb199805f99c414f60ea34fefcf27639fc8e1a33ad1022",
+      "image": "ghcr.io/qbitleap/qord-indexer@sha256:7d84bbf4fdf21b4929afb9645e83208ff3ed9e32bbee03594e2812a38959b837",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -86,7 +86,7 @@
       "stop_grace_period": "2m"
     },
     "ui": {
-      "image": "ghcr.io/qbitleap/qord-indexer@sha256:c6e25816a32c50fc5fcb199805f99c414f60ea34fefcf27639fc8e1a33ad1022",
+      "image": "ghcr.io/qbitleap/qord-indexer@sha256:7d84bbf4fdf21b4929afb9645e83208ff3ed9e32bbee03594e2812a38959b837",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -109,7 +109,8 @@
         "INDEX_PROTOCOL": "qord",
         "QBIT_CHAIN": "testnet4",
         "INDEX_LOCAL_TOKEN": "${APP_QBITLEAP_QORD_TESTNET4_LOCAL_TOKEN}",
-        "INDEX_API_TOKEN": "${APP_QBITLEAP_QORD_TESTNET4_API_TOKEN}"
+        "INDEX_API_TOKEN": "${APP_QBITLEAP_QORD_TESTNET4_API_TOKEN}",
+        "INDEX_ENABLED": "${INDEX_ENABLED:-0}"
       },
       "volumes": [
         "${APP_DATA_DIR}/data/index:/data:ro"

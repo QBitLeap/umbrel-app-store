@@ -8,18 +8,23 @@
     {
       "name": "INDEX_ENABLED",
       "services": [
-        "indexer"
+        "indexer",
+        "ui"
       ],
       "default": "0",
+      "options": [
+        "0",
+        "1"
+      ],
       "note": "Set 1 to index after checking Core, storage and power readiness."
     }
   ],
   "category": "finance",
   "name": "LEAP Indexer",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "tagline": "Independent read-only LEAP indexing",
   "description": "Follow your selected Qbit Core instance and maintain a separate, persistent LEAP index. Indexing starts paused; enable INDEX_ENABLED in app settings when ready. Includes a browser status page and authenticated read API. No wallets, signing or broadcasting. This is an amd64 package candidate.",
-  "releaseNotes": "",
+  "releaseNotes": "Configurable dashboard refresh in minutes, one-minute minimum, and clearer paused/index-height status.",
   "developer": "QBitLeap",
   "website": "https://github.com/QBitLeap/LEAP",
   "dependencies": [
@@ -28,7 +33,7 @@
   "repo": "https://github.com/QBitLeap/leap-umbrel",
   "support": "https://github.com/QBitLeap/leap-umbrel/issues",
   "port": 5101,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/leap-umbrel/83bd65efa40c0942e08ae76903b046c764136554/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/leap-umbrel/fdc97907c319ce49f58f9afa5ca4beb85f5bd62c/icon.svg",
   "gallery": [],
   "path": "",
   "defaultUsername": "",
