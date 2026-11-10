@@ -3,9 +3,9 @@
 Community distribution for the independent Qbit Core, LEAP, PINS and qord
 Umbrel apps. Each app keeps its source and image release workflow in its own
 QBitLeap repository. Initial packages target Linux amd64 and umbrelOS 2.0+.
-The initial `0.1.0-alpha.1` catalog is published. Its pinned images passed
-isolated Mainnet/Testnet4 integration; managed installation and real-chain
-operation acceptance remain pending.
+Published package versions are listed in the catalog manifests. Their pinned
+images passed isolated Mainnet/Testnet4 integration; real-chain operation
+requires its own acceptance. Use Umbrel’s Update action to retain installed app data.
 
 App sources: [Qbit Core](https://github.com/QBitLeap/qbit-core-umbrel),
 [LEAP](https://github.com/QBitLeap/leap-umbrel),
