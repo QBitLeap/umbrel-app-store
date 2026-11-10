@@ -21,7 +21,7 @@
       "tmpfs": [
         "/tmp:rw,nosuid,nodev,noexec,size=32m,mode=1777"
       ],
-      "image": "ghcr.io/qbitleap/qbit-core@sha256:1da002444761d3181eacec4d951aea6926fc945ca72bd1850fb60aa86bad9a52",
+      "image": "ghcr.io/qbitleap/qbit-core@sha256:2e97a63ce8c8e1bddc092371fb734565beff2cdb626f85c64a51c754e8420a8b",
       "command": [
         "serve"
       ],
@@ -68,7 +68,7 @@
       "tmpfs": [
         "/tmp:rw,nosuid,nodev,noexec,size=32m,mode=1777"
       ],
-      "image": "ghcr.io/qbitleap/qbit-core-services@sha256:9589d28eda559b6d9ea6b6051ce05ba1fb4db07a780e6c5db471031faef2aa4d",
+      "image": "ghcr.io/qbitleap/qbit-core-services@sha256:d1200610437d8ff677067178e92e837fb02e6549488fb17ec0ef983084a2e5e4",
       "command": [
         "broker"
       ],
@@ -119,7 +119,7 @@
       "tmpfs": [
         "/tmp:rw,nosuid,nodev,noexec,size=32m,mode=1777"
       ],
-      "image": "ghcr.io/qbitleap/qbit-core-services@sha256:9589d28eda559b6d9ea6b6051ce05ba1fb4db07a780e6c5db471031faef2aa4d",
+      "image": "ghcr.io/qbitleap/qbit-core-services@sha256:d1200610437d8ff677067178e92e837fb02e6549488fb17ec0ef983084a2e5e4",
       "command": [
         "ui"
       ],
@@ -129,8 +129,7 @@
         "QBIT_CHAIN": "main",
         "QBIT_READ_URL": "${APP_QBITLEAP_CORE_MAIN_READ_URL}",
         "QBIT_UI_TOKEN": "${APP_QBITLEAP_CORE_MAIN_UI_TOKEN}",
-        "QBIT_CONTROL_TOKEN": "${APP_QBITLEAP_CORE_MAIN_CONTROL_TOKEN}",
-        "QBIT_CONTROL_PASSWORD": "${APP_PASSWORD}"
+        "QBIT_CONTROL_TOKEN": "${APP_QBITLEAP_CORE_MAIN_CONTROL_TOKEN}"
       },
       "depends_on": {
         "broker": {

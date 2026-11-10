@@ -7,7 +7,7 @@
       }
     },
     "transport": {
-      "image": "ghcr.io/qbitleap/pins-indexer@sha256:2750b893c496671158461dcc88d9bb67e821576e8c4acfb428e592a9a0790679",
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:51b436cb9ca4e05dc0c0f3ac6e06e6c99a150a5106cd4bd45f6349b815191dfa",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -47,7 +47,7 @@
       }
     },
     "indexer": {
-      "image": "ghcr.io/qbitleap/pins-indexer@sha256:2750b893c496671158461dcc88d9bb67e821576e8c4acfb428e592a9a0790679",
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:51b436cb9ca4e05dc0c0f3ac6e06e6c99a150a5106cd4bd45f6349b815191dfa",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -86,7 +86,7 @@
       "stop_grace_period": "2m"
     },
     "ui": {
-      "image": "ghcr.io/qbitleap/pins-indexer@sha256:2750b893c496671158461dcc88d9bb67e821576e8c4acfb428e592a9a0790679",
+      "image": "ghcr.io/qbitleap/pins-indexer@sha256:51b436cb9ca4e05dc0c0f3ac6e06e6c99a150a5106cd4bd45f6349b815191dfa",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",

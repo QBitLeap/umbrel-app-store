@@ -21,7 +21,7 @@
   ],
   "category": "finance",
   "name": "Qbit Core \u00b7 Testnet4",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.1",
   "tagline": "Your own Qbit node and authenticated indexer reads",
   "description": "Run an independent Qbit Core node with a browser status page. Peer synchronization starts automatically. Pause or resume it with the dashboard switch. Wallets are disabled. Compatible indexers use authenticated read RPC; Core cookies stay private. Each instance keeps its own network-specific data. This is an amd64 package candidate.",
   "releaseNotes": "Configurable minute refresh, explicit sync progress, saved networking switch and automatic peer synchronization for new nodes.",
@@ -31,10 +31,8 @@
   "repo": "https://github.com/QBitLeap/qbit-core-umbrel",
   "support": "https://github.com/QBitLeap/qbit-core-umbrel/issues",
   "port": 5110,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/qbit-core-umbrel/289cf1e53a890874835e46c7469b28d30c8b80ab/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/qbit-core-umbrel/cc09418941fbd3c5f9badef7a9147a4f9ed2b49e/icon.svg",
   "gallery": [],
   "path": "",
-  "defaultUsername": "operator",
-  "deterministicPassword": true,
   "submitter": "QBitLeap"
 }

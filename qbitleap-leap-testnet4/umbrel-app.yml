@@ -21,7 +21,7 @@
   ],
   "category": "finance",
   "name": "LEAP Indexer \u00b7 Testnet4",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.1",
   "tagline": "Independent read-only LEAP indexing",
   "description": "Follow your selected Qbit Core instance and maintain a separate, persistent LEAP index. Indexing starts paused; enable INDEX_ENABLED in app settings when ready. Includes a browser status page and authenticated read API. No wallets, signing or broadcasting. This is an amd64 package candidate.",
   "releaseNotes": "Configurable dashboard refresh in minutes, one-minute minimum, and clearer paused/index-height status.",
