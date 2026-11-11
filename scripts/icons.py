@@ -45,10 +45,10 @@ def compose_icon(source, target, *, platform=None, testnet4=False):
 
     overlays = []
     marks = {"macos": "apple", "windows": "windows", "linux": "tux"}
+    if testnet4:
+        overlays.append(("testnet4", 0, 0))
     if platform is not None:
         overlays.append((marks[platform], 0.68, 0.05))
-    if testnet4:
-        overlays.append(("testnet4", 0.05, 0.67))
     elements = []
     for name, left, top in overlays:
         artwork = mark(name)
@@ -57,6 +57,13 @@ def compose_icon(source, target, *, platform=None, testnet4=False):
             "width": f"{width * 0.28:g}", "height": f"{height * 0.28:g}",
             "opacity": "0.5", "data-mark": name, "aria-hidden": "true",
         })
+        if name == "testnet4":
+            # The previous cone's outer base ended at 94.4% of the square.
+            baseline = 0.67 + 0.28 * 47 / 48
+            artwork.attrib.update({
+                "width": f"{width:g}", "height": f"{height * baseline:g}",
+                "viewBox": "1 2 46 45", "preserveAspectRatio": "none",
+            })
         elements.append(ET.tostring(artwork, encoding="unicode"))
     position = text.rfind("</svg>")
     target.write_text(text[:position] + "".join(elements) + text[position:], encoding="utf-8")
