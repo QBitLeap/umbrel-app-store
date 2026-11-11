@@ -7,8 +7,8 @@ Published package versions are listed in the catalog manifests. Their pinned
 images passed isolated Mainnet/Testnet4 integration; real-chain operation
 requires its own acceptance. Use Umbrel’s Update action to retain installed app data.
 
-App sources: [Qbit Core](https://github.com/QBitLeap/qbit-core-umbrel),
-[LEAP](https://github.com/QBitLeap/leap-umbrel),
+Platform downloads and app sources are available for [Qbit Core](https://github.com/QBitLeap/qbit-core-umbrel),
+[LEAP](https://github.com/QBitLeap/LEAP),
 [PINS](https://github.com/QBitLeap/pins-umbrel) and
 [qord](https://github.com/QBitLeap/qord-umbrel).
 
@@ -26,7 +26,7 @@ App sources: [Qbit Core](https://github.com/QBitLeap/qbit-core-umbrel),
    source labels, both networks, auth/isolation, tip behavior, restart and
    single-writer protection before generating a catalog.
 6. Set publish_catalog only when ready to commit the accepted catalog. The
-   generated apps use immutable registry digests and source-pinned icons.
+   generated apps use immutable registry digests and network-specific icons.
 
 The store intentionally has no placeholder app directories. Adding a source
 repository or a locally built image ID is not a completed app release.
