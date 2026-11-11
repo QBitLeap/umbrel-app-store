@@ -9,6 +9,8 @@ import re
 import shutil
 import subprocess
 
+from icons import compose_icon
+
 ROLES = {"core": "qbit-core", "services": "qbit-core-services", "leap": "leap-indexer",
          "pins": "pins-indexer", "qord": "qord-indexer"}
 APPS = ("qbit-core", "leap", "pins", "qord")
@@ -78,11 +80,20 @@ def assemble(output, apps_root, sources, images, receipt, version="0.1.1"):
             spec.loader.exec_module(module)
             app_id = core_id if role == "qbit-core" else "qbitleap-" + role + "-" + chain
             icon = "https://raw.githubusercontent.com/QBitLeap/" + role + "-umbrel/" + sources["apps"][role]["commit"] + "/icon.svg"
+            if chain == "testnet4":
+                icon = f"https://raw.githubusercontent.com/QBitLeap/umbrel-app-store/main/{app_id}/icon.svg?v={version}"
             args = [output / app_id, app_id, chain, 5100 + ordinal * 10 + offset]
             if role == "qbit-core":
                 module.prepare(*args, images["core"], images["services"], icon_url=icon, package_version=version)
             else:
                 module.prepare(*args, images[role], core_id, icon_url=icon, package_version=version)
+            if chain == "testnet4":
+                icon_file = output / app_id / "icon.svg"
+                compose_icon(repo / "icon.svg", icon_file, testnet4=True)
+                package_receipt = icon_file.with_name("package-receipt.json")
+                package = json.loads(package_receipt.read_text())
+                package["files"]["icon.svg"] = hashlib.sha256(icon_file.read_bytes()).hexdigest()
+                package_receipt.write_text(json.dumps(package, indent=2) + "\n")
     (output / "images.lock.json").write_text(json.dumps(images, sort_keys=True, indent=2) + "\n")
     (output / "acceptance.json").write_text(json.dumps(receipt, sort_keys=True, indent=2) + "\n")
     manifest = {"format": "qbitleap-community-catalog-v1", "images": images, "sources": sources,
