@@ -12,7 +12,7 @@
     "data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "docker-compose.yml": "81ab815c541f4f003b5453b52b691f754e67fcd7579f97b5b645068c23903b3a",
     "exports.sh": "615a21e68deb80e2bff2cd293091eb4826591abd3dcffe8ff40d12915fad03cf",
-    "icon.svg": "0c738f956ee2f07df2706a124fc7fa764c211db62b980dfc0de807fa501eeb4a",
-    "umbrel-app.yml": "1a85df645404efce248f89eac1badab763409c5c349b131992e111405c425b38"
+    "icon.svg": "5dd56041fe6100532c61326519bc499e41ff924986febeef761be1d5dd510c35",
+    "umbrel-app.yml": "b9d5055d0e56a8a0f17d337cf43100de8600b9369be14c0afc1e1d016c71c99f"
   }
 }

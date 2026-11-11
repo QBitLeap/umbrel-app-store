@@ -34,7 +34,7 @@
         "txindexSynced": true,
         "uiHasNoCoreCookie": true,
         "unauthenticatedReadRejected": true,
-        "verificationProgress": 5.867678567394542e-06
+        "verificationProgress": 5.862615469097176e-06
       },
       "coreBeforeRestart": {
         "bestBlockHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
@@ -49,7 +49,7 @@
         "transactionRoutingAccepted": false,
         "txindexHeight": 0,
         "txindexSynced": true,
-        "verificationProgress": 5.867678567394542e-06
+        "verificationProgress": 5.862615469097176e-06
       },
       "fixtureCleanupComplete": true,
       "passed": true,
@@ -58,8 +58,8 @@
           "apiAuthenticationAccepted": true,
           "app": "LEAP",
           "duplicateWriterRefused": true,
-          "indexHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
-          "indexHeight": 0,
+          "indexHash": null,
+          "indexHeight": -1,
           "indexingEnabled": true,
           "items": 0,
           "network": "main",
@@ -103,7 +103,7 @@
           "transactionRoutingAccepted": false
         }
       },
-      "runId": "69a440b83d7144ebac98e788412a698e",
+      "runId": "a14d1ef975e842fa89c03a873627cc39",
       "stage": "all isolated app checks passed"
     },
     "testnet4": {
@@ -131,7 +131,7 @@
         "txindexSynced": true,
         "uiHasNoCoreCookie": true,
         "unauthenticatedReadRejected": true,
-        "verificationProgress": 4.74235646744396e-06
+        "verificationProgress": 4.739049005557957e-06
       },
       "coreBeforeRestart": {
         "bestBlockHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
@@ -146,7 +146,7 @@
         "transactionRoutingAccepted": false,
         "txindexHeight": 0,
         "txindexSynced": true,
-        "verificationProgress": 4.74235646744396e-06
+        "verificationProgress": 4.739049005557957e-06
       },
       "fixtureCleanupComplete": true,
       "passed": true,
@@ -200,7 +200,7 @@
           "transactionRoutingAccepted": false
         }
       },
-      "runId": "32108ef901134f0796a44ee6a5b50845",
+      "runId": "9f3714d9361d4c94a6ed093cc182b7f8",
       "stage": "all isolated app checks passed"
     }
   },
