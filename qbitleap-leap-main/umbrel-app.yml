@@ -21,7 +21,7 @@
   ],
   "category": "finance",
   "name": "LEAP Indexer",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "tagline": "Independent read-only LEAP indexing",
   "description": "Follow your selected Qbit Core instance and maintain a separate, persistent LEAP index. Indexing starts automatically when Core is available. Includes a browser status page, authenticated read API and a terminal launcher for wallet-backed inscriptions. This is an amd64 package candidate.",
   "releaseNotes": "Indexing starts automatically. Run the LEAP CLI from the Umbrel terminal to inscribe with a local Core wallet.",
