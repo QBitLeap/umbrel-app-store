@@ -11,9 +11,9 @@
     "data/auth/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "data/core/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "docker-compose.yml": "d07af63b87344c2979fcd8a9db052108f9084e4f7d2bff855872913da6cf51ec",
-    "exports.sh": "56274b7967784c584dbdb405366d16c366a2fe008ea78d7a4328d9c7faaa7adc",
+    "exports.sh": "639fdd630ab39670422f1cf9b3e87ae752a229b6d2dfbaa2de83a552c705c9b1",
     "icon.svg": "6a05504ddbd79dc12ea6b46eeab36a6b9aca23ce5bd33b8e94bb9fedf419e0b1",
     "qbit-terminal.sh": "0e2233737a101f72a1c9aff858a6034688c2bbb6978c5ec7626eb18260f37b96",
-    "umbrel-app.yml": "99fe5a9a9753155355645103abfc83b1745916c65db1b7938d4cc066fe5cc15d"
+    "umbrel-app.yml": "68767d3ffdb05b2e69ca13dfc5a6c9a9b3ccd31ce9cc62787371f77c950a294d"
   }
 }

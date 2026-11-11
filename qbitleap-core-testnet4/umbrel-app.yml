@@ -33,7 +33,7 @@
   ],
   "category": "finance",
   "name": "Qbit Core \u00b7 Testnet4",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "tagline": "Your own Qbit node and authenticated indexer reads",
   "description": "Run an independent Qbit Core node with a browser status page. Peer synchronization starts automatically. Pause or resume it with the dashboard switch. Local Core wallets are enabled by default. Compatible indexers use authenticated read RPC. Each instance keeps its own network-specific data. This is an amd64 package candidate.",
   "releaseNotes": "Local wallets start automatically for LEAP and qord terminal commands.",
@@ -43,7 +43,7 @@
   "repo": "https://github.com/QBitLeap/qbit-core-umbrel",
   "support": "https://github.com/QBitLeap/qbit-core-umbrel/issues",
   "port": 5110,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/umbrel-app-store/main/qbitleap-core-testnet4/icon.svg?v=0.1.4",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/umbrel-app-store/main/qbitleap-core-testnet4/icon.svg?v=0.1.5",
   "gallery": [],
   "path": "",
   "submitter": "QBitLeap"

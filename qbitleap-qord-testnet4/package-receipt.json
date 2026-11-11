@@ -11,8 +11,8 @@
   "files": {
     "data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "docker-compose.yml": "81ab815c541f4f003b5453b52b691f754e67fcd7579f97b5b645068c23903b3a",
-    "exports.sh": "92935d6e39c04846c3c6539906d9f9bb741a1fe6e50b56e963615fba3d680f54",
+    "exports.sh": "615a21e68deb80e2bff2cd293091eb4826591abd3dcffe8ff40d12915fad03cf",
     "icon.svg": "0c738f956ee2f07df2706a124fc7fa764c211db62b980dfc0de807fa501eeb4a",
-    "umbrel-app.yml": "514f82bf84b034c7e12b341d31a6a974721155a892c14bc4d4fbbdc0c8d5e66d"
+    "umbrel-app.yml": "1a85df645404efce248f89eac1badab763409c5c349b131992e111405c425b38"
   }
 }
