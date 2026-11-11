@@ -3,19 +3,23 @@
   "apps": {
     "qbit-core": {
       "repository": "https://github.com/QBitLeap/qbit-core-umbrel.git",
-      "commit": "71b2684017f8b94c5c17fa1e22f6b574ca19b25d"
+      "commit": "71b2684017f8b94c5c17fa1e22f6b574ca19b25d",
+      "packageCommit": "7f6311fa27eed7680780d3ef7744c14ea4f89504"
     },
     "leap": {
       "repository": "https://github.com/QBitLeap/leap-umbrel.git",
-      "commit": "5dd19d247745a7e3d5feb4ea2ad43b9806628eb6"
+      "commit": "5dd19d247745a7e3d5feb4ea2ad43b9806628eb6",
+      "packageCommit": "2c54900b4eddafee53474d90c1edb305e7b2515f"
     },
     "pins": {
       "repository": "https://github.com/QBitLeap/pins-umbrel.git",
-      "commit": "ff7bf5c4974381575f98015dd97bf341c5029513"
+      "commit": "ff7bf5c4974381575f98015dd97bf341c5029513",
+      "packageCommit": "374492cc1263a2c13f3f052ab776fc5d16c84dde"
     },
     "qord": {
       "repository": "https://github.com/QBitLeap/qord-umbrel.git",
-      "commit": "839284e94e8bf01047f9912f2016f1876d6736df"
+      "commit": "839284e94e8bf01047f9912f2016f1876d6736df",
+      "packageCommit": "18d78ad3317842c88823a559c08eb924ffb88de6"
     }
   }
 }

@@ -16,6 +16,11 @@ ROLES = {"core": "qbit-core", "services": "qbit-core-services", "leap": "leap-in
 APPS = ("qbit-core", "leap", "pins", "qord")
 
 
+def package_commit(source):
+    """Allow package fixes to reuse an already verified runtime image."""
+    return source.get("packageCommit", source["commit"])
+
+
 def validate_images(images):
     if not isinstance(images, dict) or set(images) != set(ROLES):
         raise ValueError("Exactly five published component images are required")
@@ -62,12 +67,13 @@ def assemble(output, apps_root, sources, images, receipt, version="0.1.1"):
         raise ValueError("Four pinned app source repositories required")
     for role, item in sources["apps"].items():
         if (item["repository"] != "https://github.com/QBitLeap/" + role + "-umbrel.git"
-                or re.fullmatch(r"[0-9a-f]{40}", item["commit"]) is None):
+                or any(re.fullmatch(r"[0-9a-f]{40}", revision) is None
+                       for revision in (item["commit"], package_commit(item)))):
             raise ValueError("Unexpected app source identity")
         repo = apps_root / (role + "-umbrel")
         head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip()
         untracked = set(subprocess.check_output(["git", "ls-files", "--others", "--exclude-standard", "-z"], cwd=repo).decode().rstrip("\0").split("\0")) - {""}
-        if (head != item["commit"] or subprocess.run(["git", "diff", "--quiet", "HEAD"], cwd=repo).returncode
+        if (head != package_commit(item) or subprocess.run(["git", "diff", "--quiet", "HEAD"], cwd=repo).returncode
                 or untracked - {".source-receipt.json"}):
             raise ValueError("App source differs from its pinned commit")
     output.mkdir(parents=True)
@@ -79,7 +85,7 @@ def assemble(output, apps_root, sources, images, receipt, version="0.1.1"):
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
             app_id = core_id if role == "qbit-core" else "qbitleap-" + role + "-" + chain
-            icon = "https://raw.githubusercontent.com/QBitLeap/" + role + "-umbrel/" + sources["apps"][role]["commit"] + "/icon.svg"
+            icon = "https://raw.githubusercontent.com/QBitLeap/" + role + "-umbrel/" + package_commit(sources["apps"][role]) + "/icon.svg"
             if chain == "testnet4":
                 icon = f"https://raw.githubusercontent.com/QBitLeap/umbrel-app-store/main/{app_id}/icon.svg?v={version}"
             args = [output / app_id, app_id, chain, 5100 + ordinal * 10 + offset]

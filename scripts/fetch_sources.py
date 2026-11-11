@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from source_fetch import fetch
-from catalog import APPS
+from catalog import APPS, package_commit
 
 
 if __name__ == "__main__":
@@ -19,4 +19,4 @@ if __name__ == "__main__":
     for role, item in lock["apps"].items():
         if item["repository"] != "https://github.com/QBitLeap/" + role + "-umbrel.git":
             raise ValueError("Unexpected app source repository")
-        fetch(args.output / (role + "-umbrel"), item)
+        fetch(args.output / (role + "-umbrel"), {**item, "commit": package_commit(item)})

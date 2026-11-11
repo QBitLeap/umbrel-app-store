@@ -51,6 +51,8 @@ jobs:
         env:
           PACKAGE_VERSION: ${{ inputs.version }}
         run: python scripts/catalog.py .release/catalog --apps-root .release/sources --sources sources.lock.json --images .release/input-images.json --acceptance .release/acceptance.json --version "$PACKAGE_VERSION"
+      - name: Verify exported credentials in dependent app contexts
+        run: python scripts/check_exports.py .release/catalog
       - name: Promote catalog after explicit approval
         if: inputs.publish_catalog
         env:
