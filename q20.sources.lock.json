@@ -1,0 +1,5 @@
+{
+  "repository": "https://github.com/QBitLeap/q20.git",
+  "commit": "df2b5d23c6804051d9ce28c4f66faf7ff36a26eb",
+  "image": "ghcr.io/qbitleap/q20@sha256:3ef20bbaaafa355c2cdeeeadb4f3c74695156d8d189b839a5ae6764ca24d9de8"
+}

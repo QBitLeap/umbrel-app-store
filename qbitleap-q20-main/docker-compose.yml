@@ -1,0 +1,50 @@
+{
+  "services": {
+    "app_proxy": {
+      "environment": {
+        "APP_HOST": "qbitleap-q20-main_q20_1",
+        "APP_PORT": 8080
+      }
+    },
+    "q20": {
+      "image": "ghcr.io/qbitleap/q20@sha256:3ef20bbaaafa355c2cdeeeadb4f3c74695156d8d189b839a5ae6764ca24d9de8",
+      "user": "1000:1000",
+      "init": true,
+      "restart": "on-failure",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 128,
+      "mem_limit": "2048m",
+      "cpus": 2,
+      "stop_grace_period": "2m",
+      "environment": {
+        "Q20_CORE_READ_URL": "${APP_QBITLEAP_CORE_MAIN_READ_URL}",
+        "Q20_CORE_READ_TOKEN": "${APP_QBITLEAP_CORE_MAIN_READ_TOKEN}",
+        "Q20_API_TOKEN": "${APP_QBITLEAP_Q20_MAIN_API_TOKEN}",
+        "Q20_ALLOWED_HOSTS": "*"
+      },
+      "volumes": [
+        "${APP_DATA_DIR}/data/index:/data"
+      ],
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,noexec,size=64m,mode=1777"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "from urllib.request import urlopen; urlopen('http://127.0.0.1:8080/healthz',timeout=2).close()"
+        ],
+        "interval": "1m",
+        "timeout": "5s",
+        "retries": 3
+      }
+    }
+  }
+}

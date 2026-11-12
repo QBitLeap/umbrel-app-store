@@ -1,0 +1,14 @@
+{
+  "format": "qbitleap-q20-catalog-v1",
+  "image": "ghcr.io/qbitleap/q20@sha256:3ef20bbaaafa355c2cdeeeadb4f3c74695156d8d189b839a5ae6764ca24d9de8",
+  "files": {
+    "q20-acceptance.json": "969218537c2dee3268a471ba749393a644e3c35746323708d00e13e724554354",
+    "q20.sources.lock.json": "eb96a0179894a0bc7933f2aa47f5504110a0c3a6dbb8349ce9201606c16348bd",
+    "qbitleap-q20-main/icon.svg": "42af0bd18a79e71379e2eec4ea2d781430f03b45d5b9d72d5294f2afbe672332",
+    "qbitleap-q20-main/umbrel-app.yml": "149f23e7376cf004000ecbae8c86255c2731e880ac64f6202ca8e13bd38c0814",
+    "qbitleap-q20-main/exports.sh": "7f2b3ee2bcd669b9130128f83a92d057a61a66aafab49c8d02fff83b2373cd70",
+    "qbitleap-q20-main/docker-compose.yml": "6d858a13db7b780333f7b3b34d857b7e5365adf3705d2f476552630b7e9a5468",
+    "qbitleap-q20-main/package-receipt.json": "166a4e38683a5f9048cb157e1f493ad571e31dae64233416b2c8c0c6b2854cb3",
+    "qbitleap-q20-main/data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "app": "qbitleap-q20-main",
+  "network": "mainnet",
+  "image": "ghcr.io/qbitleap/q20@sha256:3ef20bbaaafa355c2cdeeeadb4f3c74695156d8d189b839a5ae6764ca24d9de8",
+  "installed": false,
+  "fullUmbrelInstallationAccepted": false,
+  "testnet4RulesAccepted": false,
+  "files": {
+    "data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docker-compose.yml": "6d858a13db7b780333f7b3b34d857b7e5365adf3705d2f476552630b7e9a5468",
+    "exports.sh": "7f2b3ee2bcd669b9130128f83a92d057a61a66aafab49c8d02fff83b2373cd70",
+    "icon.svg": "42af0bd18a79e71379e2eec4ea2d781430f03b45d5b9d72d5294f2afbe672332",
+    "umbrel-app.yml": "149f23e7376cf004000ecbae8c86255c2731e880ac64f6202ca8e13bd38c0814"
+  }
+}
