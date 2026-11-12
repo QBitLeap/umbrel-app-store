@@ -1,0 +1,76 @@
+name: Validate and publish q20 catalog
+on:
+  workflow_dispatch:
+    inputs:
+      source_commit:
+        description: Reviewed q20 source commit containing the image receipt
+        required: true
+        type: string
+      publish_catalog:
+        description: Promote q20 after anonymous pull and isolated integration pass
+        default: false
+        required: true
+        type: boolean
+permissions:
+  contents: read
+concurrency:
+  group: community-catalog
+  cancel-in-progress: false
+jobs:
+  q20:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.13'
+      - name: Validate pinned source identity
+        env:
+          Q20_SOURCE_COMMIT: ${{ inputs.source_commit }}
+        run: python -c "import os,re; assert re.fullmatch('[0-9a-f]{40}',os.environ['Q20_SOURCE_COMMIT'])"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: QBitLeap/q20
+          ref: ${{ inputs.source_commit }}
+          persist-credentials: false
+          path: .release/q20
+      - run: python -m unittest discover -s tests -v
+      - name: Verify anonymous manifest and exact native configuration
+        run: |
+          python -c "import json,sys; from pathlib import Path; sys.path.insert(0,'scripts'); from check_q20_public_image import check; p=json.load(open('.release/q20/docs/validation/published-image-0.1.1.json')); result=check(p['image']); Path('.release/anonymous.json').write_text(json.dumps(result))"
+      - name: Test the published image with owned isolated Core fixtures
+        run: |
+          python -c "import json,subprocess; p=json.load(open('.release/q20/docs/validation/published-image-0.1.1.json')); subprocess.run(['python','.release/q20/checks/umbrel_integration.py','--image',p['image'],'--output','.release/registry-integration.json'],check=True)"
+      - name: Assemble q20 without regenerating other apps
+        env:
+          Q20_SOURCE_COMMIT: ${{ inputs.source_commit }}
+        run: python scripts/q20_catalog.py .release/q20-catalog --source .release/q20 --revision "$Q20_SOURCE_COMMIT" --integration .release/registry-integration.json
+      - name: Check all dependency-export caller contexts
+        run: |
+          python -c "from pathlib import Path; import shutil; target=Path('.release/export-check'); target.mkdir(); [shutil.copytree(p,target/p.name) for p in Path('.').glob('qbitleap-*') if p.is_dir() and p.name!='qbitleap-q20-main']; shutil.copytree(Path('.release/q20-catalog/qbitleap-q20-main'),target/'qbitleap-q20-main')"
+          python scripts/check_exports.py .release/export-check
+      - name: Promote only accepted q20 files
+        if: inputs.publish_catalog
+        run: |
+          python -c "import json,sys; from pathlib import Path; sys.path.insert(0,'scripts'); from q20_catalog import promote; promote(Path('.release/q20-catalog'),Path('.'),json.load(open('.release/anonymous.json'))['passed'])"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- qbitleap-q20-main q20-acceptance.json q20.sources.lock.json q20-catalog-manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish q20 0.1.1 community app"
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: q20-community-catalog
+          include-hidden-files: true
+          path: |
+            .release/q20-catalog
+            .release/anonymous.json
+            .release/registry-integration.json

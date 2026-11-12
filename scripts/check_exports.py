@@ -17,13 +17,15 @@ for variable do printenv "$variable"; done
 
 def check(catalog):
     manifests = [json.loads(path.read_text()) for path in catalog.glob("qbitleap-*/umbrel-app.yml")]
-    if len(manifests) != 8:
-        raise ValueError("Expected all eight app variants")
+    if len(manifests) not in (8,9) or (len(manifests)==9 and not any(app["id"]=="qbitleap-q20-main" for app in manifests)):
+        raise ValueError("Expected the eight existing app variants and optional Mainnet q20")
     app_ids = [app["id"] for app in manifests]
     for app_id in app_ids:
         prefix = "APP_" + app_id.upper().replace("-", "_")
         if app_id.startswith("qbitleap-core-"):
             purposes = {"READ_TOKEN": "read-rpc", "UI_TOKEN": "status-ui", "CONTROL_TOKEN": "network-control"}
+        elif app_id=="qbitleap-q20-main":
+            purposes = {"API_TOKEN": "read-api"}
         else:
             purposes = {"API_TOKEN": "read-api", "LOCAL_TOKEN": "local-rpc"}
         variables = [f"{prefix}_{purpose}" for purpose in purposes]
@@ -35,7 +37,7 @@ def check(catalog):
             ).splitlines()
             if actual != expected:
                 raise ValueError(f"{app_id} exports vary when sourced by {caller}")
-    print("All eight app exports retain their own credential context under every caller")
+    print(f"All {len(manifests)} app exports retain their own credential context under every caller")
 
 
 if __name__ == "__main__":

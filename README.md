@@ -1,6 +1,6 @@
 # QBitLeap community app store
 
-Community distribution for the independent Qbit Core, LEAP, PINS and qord
+Community distribution for the independent Qbit Core, LEAP, PINS, qord and q20
 Umbrel apps. Each app keeps its source and image release workflow in its own
 QBitLeap repository. Initial packages target Linux amd64 and umbrelOS 2.0+.
 Published package versions are listed in the catalog manifests. Their pinned
@@ -10,7 +10,8 @@ requires its own acceptance. Use Umbrel’s Update action to retain installed ap
 Platform downloads and app sources are available for [Qbit Core](https://github.com/QBitLeap/qbit-core-umbrel),
 [LEAP](https://github.com/QBitLeap/LEAP),
 [PINS](https://github.com/QBitLeap/pins-umbrel) and
-[qord](https://github.com/QBitLeap/qord-umbrel).
+[qord](https://github.com/QBitLeap/qord-umbrel) and
+[q20](https://github.com/QBitLeap/q20).
 
 ## Release flow
 
@@ -61,3 +62,13 @@ digest-pinned images. It creates labelled empty-chain resources, keeps peers
 off, and cleans up only its own containers, volumes and private network.
 Managed dashboard installation and real-chain operation require their own
 acceptance after catalog publication.
+
+## q20 Mainnet addition
+
+q20 uses an independent package receipt and catalog manifest. Its release job
+retains the exact native-tested engine image, verifies anonymous GHCR access,
+then tests that published image with the current Core/read gateway. The q20
+catalog workflow validates all dependency credential contexts before promoting
+only the new q20 entry. Existing Core/LEAP/PINS/qord packages and their versions
+are preserved. A Testnet4 q20 entry is not generated without reviewed activation
+rules. See the q20 repository's validation findings for installation/parity gates.
