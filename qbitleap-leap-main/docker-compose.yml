@@ -7,7 +7,7 @@
       }
     },
     "transport": {
-      "image": "ghcr.io/qbitleap/leap-indexer@sha256:9343657b402a707dc52008762bcae06947b59c549d9f60d6ebb5281ebf93017c",
+      "image": "ghcr.io/qbitleap/leap-indexer@sha256:ac68aaf28b96cebf6f7be35b3994fa79b34cfd36e1778db4cc5dfde348d05594",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -47,7 +47,7 @@
       }
     },
     "indexer": {
-      "image": "ghcr.io/qbitleap/leap-indexer@sha256:9343657b402a707dc52008762bcae06947b59c549d9f60d6ebb5281ebf93017c",
+      "image": "ghcr.io/qbitleap/leap-indexer@sha256:ac68aaf28b96cebf6f7be35b3994fa79b34cfd36e1778db4cc5dfde348d05594",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",
@@ -86,7 +86,7 @@
       "stop_grace_period": "2m"
     },
     "ui": {
-      "image": "ghcr.io/qbitleap/leap-indexer@sha256:9343657b402a707dc52008762bcae06947b59c549d9f60d6ebb5281ebf93017c",
+      "image": "ghcr.io/qbitleap/leap-indexer@sha256:ac68aaf28b96cebf6f7be35b3994fa79b34cfd36e1778db4cc5dfde348d05594",
       "user": "1000:1000",
       "init": true,
       "restart": "on-failure",

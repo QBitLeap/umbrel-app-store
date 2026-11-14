@@ -1,33 +1,33 @@
 {
-  "format": "qbitleap-community-sources-v1",
   "apps": {
-    "qbit-core": {
-      "repository": "https://github.com/QBitLeap/qbit-core.git",
-      "commit": "71b2684017f8b94c5c17fa1e22f6b574ca19b25d",
-      "packageCommit": "a9b8c52d4e70fffb3d74f4944cf405c70cc7c5f9",
-      "imageSourceRepository": "https://github.com/QBitLeap/qbit-core-umbrel.git",
-      "path": ""
-    },
     "leap": {
-      "repository": "https://github.com/QBitLeap/LEAP.git",
-      "commit": "5dd19d247745a7e3d5feb4ea2ad43b9806628eb6",
-      "packageCommit": "2cc56e1d80f39f35349ca4cb2c2844f6b53d81da",
-      "imageSourceRepository": "https://github.com/QBitLeap/leap-umbrel.git",
-      "path": "umbrel"
+      "commit": "7dddcb557b63e312de110f392e26788df71467d9",
+      "imageSourceRepository": "https://github.com/QBitLeap/LEAP.git",
+      "packageCommit": "7dddcb557b63e312de110f392e26788df71467d9",
+      "path": "umbrel",
+      "repository": "https://github.com/QBitLeap/LEAP.git"
     },
     "pins": {
-      "repository": "https://github.com/QBitLeap/pins-app.git",
       "commit": "ff7bf5c4974381575f98015dd97bf341c5029513",
-      "packageCommit": "67040fabca1b363351235a431790e12e1281fda2",
       "imageSourceRepository": "https://github.com/QBitLeap/pins-umbrel.git",
-      "path": ""
+      "packageCommit": "67040fabca1b363351235a431790e12e1281fda2",
+      "path": "",
+      "repository": "https://github.com/QBitLeap/pins-app.git"
+    },
+    "qbit-core": {
+      "commit": "71b2684017f8b94c5c17fa1e22f6b574ca19b25d",
+      "imageSourceRepository": "https://github.com/QBitLeap/qbit-core-umbrel.git",
+      "packageCommit": "a9b8c52d4e70fffb3d74f4944cf405c70cc7c5f9",
+      "path": "",
+      "repository": "https://github.com/QBitLeap/qbit-core.git"
     },
     "qord": {
-      "repository": "https://github.com/QBitLeap/qord-app.git",
       "commit": "839284e94e8bf01047f9912f2016f1876d6736df",
-      "packageCommit": "38dfdea60db141f9dd1766ef3dd06f3d4d613071",
       "imageSourceRepository": "https://github.com/QBitLeap/qord-umbrel.git",
-      "path": ""
+      "packageCommit": "38dfdea60db141f9dd1766ef3dd06f3d4d613071",
+      "path": "",
+      "repository": "https://github.com/QBitLeap/qord-app.git"
     }
-  }
+  },
+  "format": "qbitleap-community-sources-v1"
 }

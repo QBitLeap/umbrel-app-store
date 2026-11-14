@@ -1,8 +1,8 @@
 {
   "files": {
-    "acceptance.json": "f4c7f42fcb5b92406bacea9c480e1b4bf56b93d0fbb4fdb865dbcf26f22747c5",
+    "acceptance.json": "044438c9dcfff942b801351a7ea3904a388a43075d9f6993e781e98eb28bc3ce",
     "core-broker-acceptance.json": "badb87fc3f65d446cdbc8d00e84e8c1db9b5c8452ce99463321233a62a3cdbb3",
-    "images.lock.json": "9d9d17c493ab74e3e4d1571b436f8eaba292671f2bf67fac596b4a799547c413",
+    "images.lock.json": "6b76702e2e100701a19c07c62fcc08f467d1af0afc52801a163136c2f1d2920b",
     "qbitleap-core-main/data/auth/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "qbitleap-core-main/data/core/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "qbitleap-core-main/docker-compose.yml": "1bca77f9f148b44efac7ed2672b1aa9de0133de37115318551d98a23bbf7fcfb",
@@ -20,17 +20,17 @@
     "qbitleap-core-testnet4/qbit-terminal.sh": "0e2233737a101f72a1c9aff858a6034688c2bbb6978c5ec7626eb18260f37b96",
     "qbitleap-core-testnet4/umbrel-app.yml": "d5eed5d053f47cfff0ccde77cc2c7bda40bd6cb583af5b2296d082e7c7aa309c",
     "qbitleap-leap-main/data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "qbitleap-leap-main/docker-compose.yml": "096ef0e285052a0b2294723716ed8493227d043d71ba3c044f023d2e3a2def1b",
+    "qbitleap-leap-main/docker-compose.yml": "1ff7dc11251b08332fa818de4d47dd74f7de85a4b375dd1ecb3cdc0b0ff8d72a",
     "qbitleap-leap-main/exports.sh": "3808dfbbd1f889a1306849a8b1c33b4e81435cf3e35d9d11ee3c251f91302ffc",
     "qbitleap-leap-main/icon.svg": "269437c3a8105cb75ea0307809c02dd3419808051ab0118e630d861b5429e509",
-    "qbitleap-leap-main/package-receipt.json": "a462a5a0057cc44f423783df53f3292721ae172583b15116b86622a0ca356abb",
-    "qbitleap-leap-main/umbrel-app.yml": "2811ea12eb4d80a5f8a40b33c2d5e846758706f42668565f3cef42d2d53d9084",
+    "qbitleap-leap-main/package-receipt.json": "97069e65b80553f62c61f7fa91f7412d03e468cb64366d5003a6d54814ad298f",
+    "qbitleap-leap-main/umbrel-app.yml": "d4db914db1f530d5a88fdf4411bbd4bf8bd3bfa61373372f151ac1ed4eeaac49",
     "qbitleap-leap-testnet4/data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "qbitleap-leap-testnet4/docker-compose.yml": "7712fbb6846604274aa966d13d967e24988bc2d41e2613b03e45409529a8d687",
+    "qbitleap-leap-testnet4/docker-compose.yml": "baa3f96ca81f0fed1b357b04a7c3b4474e44e5aac83bcab52ae5edba2b9ba18a",
     "qbitleap-leap-testnet4/exports.sh": "7c71ea81189f7d00d5eade28d313f632478286acb56d32824b310f9b57f0cb6c",
     "qbitleap-leap-testnet4/icon.svg": "c7a1d6030d66917969dc8040bea4faa71226c8fa452b0ac7ec64a8edffd61b0d",
-    "qbitleap-leap-testnet4/package-receipt.json": "8767ec3d3dc8f46090291cf93f8b32d766c61c7438ba278f2c7df78515e77988",
-    "qbitleap-leap-testnet4/umbrel-app.yml": "14b403d7ca7e0d3a5ea635ba71e55c96a0cffbc327b105638ff9c36517da6c7a",
+    "qbitleap-leap-testnet4/package-receipt.json": "e5891ae8b8cdea13788a1be49086ce636ed00c67f1d2c7381861afee75f0e755",
+    "qbitleap-leap-testnet4/umbrel-app.yml": "f5f85e81e189952e0418b9602683c2806959509f168d88c8a61c9ab6d850701d",
     "qbitleap-pins-main/data/index/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "qbitleap-pins-main/docker-compose.yml": "c9870c9bb2840c78240a2ad7fe731d18bf4be2e13bd797bb868c90c5f83d90ea",
     "qbitleap-pins-main/exports.sh": "5ec4c81a0bf52fa3a65eb3534e0060f1b690e6171d134f2fb699b67eeb61bb85",
@@ -59,7 +59,7 @@
   "format": "qbitleap-community-catalog-v1",
   "images": {
     "core": "ghcr.io/qbitleap/qbit-core@sha256:af9aca0fe1805090eb6b503505b659af434798d852a6b8efe6341bf1d5d65761",
-    "leap": "ghcr.io/qbitleap/leap-indexer@sha256:9343657b402a707dc52008762bcae06947b59c549d9f60d6ebb5281ebf93017c",
+    "leap": "ghcr.io/qbitleap/leap-indexer@sha256:ac68aaf28b96cebf6f7be35b3994fa79b34cfd36e1778db4cc5dfde348d05594",
     "pins": "ghcr.io/qbitleap/pins-indexer@sha256:1508c58ee0d3bd9176d84fe23cfe1e44c369c14a10b8a0b88d1f39ea8b163168",
     "qord": "ghcr.io/qbitleap/qord-indexer@sha256:effe4a0026a1f3326a78b22ebfe8177b1467a4f91039cf5e7e3a426bc51abd97",
     "services": "ghcr.io/qbitleap/qbit-core-services@sha256:8f6f91e8fbcdc59b67fb7cffd5bc7c105e2b9ea40957444838a6f7a32cac90b8"
@@ -74,9 +74,9 @@
   "sources": {
     "apps": {
       "leap": {
-        "commit": "5dd19d247745a7e3d5feb4ea2ad43b9806628eb6",
-        "imageSourceRepository": "https://github.com/QBitLeap/leap-umbrel.git",
-        "packageCommit": "2cc56e1d80f39f35349ca4cb2c2844f6b53d81da",
+        "commit": "7dddcb557b63e312de110f392e26788df71467d9",
+        "imageSourceRepository": "https://github.com/QBitLeap/LEAP.git",
+        "packageCommit": "7dddcb557b63e312de110f392e26788df71467d9",
         "path": "umbrel",
         "repository": "https://github.com/QBitLeap/LEAP.git"
       },
