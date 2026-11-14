@@ -30,8 +30,8 @@
   "dependencies": [
     "qbitleap-core-testnet4"
   ],
-  "repo": "https://github.com/QBitLeap/leap-umbrel",
-  "support": "https://github.com/QBitLeap/leap-umbrel/issues",
+  "repo": "https://github.com/QBitLeap/LEAP",
+  "support": "https://github.com/QBitLeap/LEAP/issues",
   "port": 5111,
   "icon": "https://raw.githubusercontent.com/QBitLeap/umbrel-app-store/main/qbitleap-leap-testnet4/icon.svg?v=0.1.6",
   "gallery": [],

@@ -40,10 +40,10 @@
   "developer": "QBitLeap",
   "website": "https://github.com/Qbit-Org/qbit",
   "dependencies": [],
-  "repo": "https://github.com/QBitLeap/qbit-core-umbrel",
-  "support": "https://github.com/QBitLeap/qbit-core-umbrel/issues",
+  "repo": "https://github.com/QBitLeap/qbit-core",
+  "support": "https://github.com/QBitLeap/qbit-core/issues",
   "port": 5100,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/qbit-core-umbrel/7f6311fa27eed7680780d3ef7744c14ea4f89504/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/qbit-core/7f6311fa27eed7680780d3ef7744c14ea4f89504/icon.svg",
   "gallery": [],
   "path": "",
   "submitter": "QBitLeap"

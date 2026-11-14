@@ -30,10 +30,10 @@
   "dependencies": [
     "qbitleap-core-main"
   ],
-  "repo": "https://github.com/QBitLeap/qord-umbrel",
-  "support": "https://github.com/QBitLeap/qord-umbrel/issues",
+  "repo": "https://github.com/QBitLeap/qord-app",
+  "support": "https://github.com/QBitLeap/qord-app/issues",
   "port": 5103,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/qord-umbrel/18d78ad3317842c88823a559c08eb924ffb88de6/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/qord-app/18d78ad3317842c88823a559c08eb924ffb88de6/icon.svg",
   "gallery": [],
   "path": "",
   "defaultUsername": "",

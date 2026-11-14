@@ -14,7 +14,7 @@
     "exports.sh": "639fdd630ab39670422f1cf9b3e87ae752a229b6d2dfbaa2de83a552c705c9b1",
     "icon.svg": "6a05504ddbd79dc12ea6b46eeab36a6b9aca23ce5bd33b8e94bb9fedf419e0b1",
     "qbit-terminal.sh": "0e2233737a101f72a1c9aff858a6034688c2bbb6978c5ec7626eb18260f37b96",
-    "umbrel-app.yml": "d7364bb037852e5d107522697e53aa9f621134d49b4c970bd296c257afd43c75"
+    "umbrel-app.yml": "636e46df888c24b5ab724bfc48345ed9e0682409c0cf4f8a797ac463aa221081"
   },
   "brokerImage": "ghcr.io/qbitleap/qbit-core-services@sha256:b222a85169b539113252dc97259371e70817a41e3cec589262997b596519b455",
   "brokerImageSourceRevision": "8ad465cc7a6daa72eb8670e99c6613fc6867d03e",

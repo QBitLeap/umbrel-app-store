@@ -14,6 +14,25 @@ from icons import compose_icon
 ROLES = {"core": "qbit-core", "services": "qbit-core-services", "leap": "leap-indexer",
          "pins": "pins-indexer", "qord": "qord-indexer"}
 APPS = ("qbit-core", "leap", "pins", "qord")
+SOURCE_REPOSITORIES = {"qbit-core":"qbit-core", "leap":"LEAP", "pins":"pins-app", "qord":"qord-app"}
+SOURCE_PATHS = {"qbit-core":"", "leap":"umbrel", "pins":"", "qord":""}
+
+def source_repository(role):
+    return "https://github.com/QBitLeap/"+SOURCE_REPOSITORIES[role]+".git"
+
+def image_source_repository(role,source):
+    legacy="https://github.com/QBitLeap/"+role+"-umbrel.git"
+    value=source.get("imageSourceRepository",source["repository"])
+    if value not in {legacy,source_repository(role)}:
+        raise ValueError("Unexpected immutable image provenance")
+    return value
+
+def source_root(apps_root,role):
+    return apps_root/role
+
+def packaging_root(apps_root,role):
+    return source_root(apps_root,role)/SOURCE_PATHS[role]
+
 
 
 def package_commit(source):
@@ -66,11 +85,11 @@ def assemble(output, apps_root, sources, images, receipt, version="0.1.1"):
     if set(sources["apps"]) != set(APPS):
         raise ValueError("Four pinned app source repositories required")
     for role, item in sources["apps"].items():
-        if (item["repository"] != "https://github.com/QBitLeap/" + role + "-umbrel.git"
+        if (item["repository"] != source_repository(role) or item.get("path", "") != SOURCE_PATHS[role]
                 or any(re.fullmatch(r"[0-9a-f]{40}", revision) is None
                        for revision in (item["commit"], package_commit(item)))):
             raise ValueError("Unexpected app source identity")
-        repo = apps_root / (role + "-umbrel")
+        repo = source_root(apps_root,role)
         head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip()
         untracked = set(subprocess.check_output(["git", "ls-files", "--others", "--exclude-standard", "-z"], cwd=repo).decode().rstrip("\0").split("\0")) - {""}
         if (head != package_commit(item) or subprocess.run(["git", "diff", "--quiet", "HEAD"], cwd=repo).returncode
@@ -80,12 +99,12 @@ def assemble(output, apps_root, sources, images, receipt, version="0.1.1"):
     for ordinal, chain in enumerate(("main", "testnet4")):
         core_id = "qbitleap-core-" + chain
         for offset, role in enumerate(APPS):
-            repo = apps_root / (role + "-umbrel")
+            repo = packaging_root(apps_root,role)
             spec = importlib.util.spec_from_file_location("package_" + role.replace("-", "_"), repo / "scripts/prepare_app_package.py")
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
             app_id = core_id if role == "qbit-core" else "qbitleap-" + role + "-" + chain
-            icon = "https://raw.githubusercontent.com/QBitLeap/" + role + "-umbrel/" + package_commit(sources["apps"][role]) + "/icon.svg"
+            icon = "https://raw.githubusercontent.com/QBitLeap/" + SOURCE_REPOSITORIES[role] + "/" + package_commit(sources["apps"][role]) + "/" + (SOURCE_PATHS[role]+"/" if SOURCE_PATHS[role] else "") + "icon.svg"
             if chain == "testnet4":
                 icon = f"https://raw.githubusercontent.com/QBitLeap/umbrel-app-store/main/{app_id}/icon.svg?v={version}"
             args = [output / app_id, app_id, chain, 5100 + ordinal * 10 + offset]

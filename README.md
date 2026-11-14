@@ -7,10 +7,10 @@ Published package versions are listed in the catalog manifests. Their pinned
 images passed isolated Mainnet/Testnet4 integration; real-chain operation
 requires its own acceptance. Use Umbrel’s Update action to retain installed app data.
 
-Platform downloads and app sources are available for [Qbit Core](https://github.com/QBitLeap/qbit-core-umbrel),
+Platform downloads and app sources are available for [Qbit Core](https://github.com/QBitLeap/qbit-core),
 [LEAP](https://github.com/QBitLeap/LEAP),
-[PINS](https://github.com/QBitLeap/pins-umbrel) and
-[qord](https://github.com/QBitLeap/qord-umbrel) and
+[PINS](https://github.com/QBitLeap/pins-app) and
+[qord](https://github.com/QBitLeap/qord-app) and
 [q20](https://github.com/QBitLeap/q20).
 
 ## Release flow

@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from source_fetch import fetch
-from catalog import APPS, package_commit
+from catalog import APPS, package_commit, source_repository, source_root, SOURCE_PATHS
 
 
 if __name__ == "__main__":
@@ -17,6 +17,6 @@ if __name__ == "__main__":
     if set(lock["apps"]) != set(APPS):
         raise ValueError("Exactly the four app sources are required")
     for role, item in lock["apps"].items():
-        if item["repository"] != "https://github.com/QBitLeap/" + role + "-umbrel.git":
+        if item["repository"] != source_repository(role) or item.get("path", "") != SOURCE_PATHS[role]:
             raise ValueError("Unexpected app source repository")
-        fetch(args.output / (role + "-umbrel"), {**item, "commit": package_commit(item)})
+        fetch(source_root(args.output,role), {**item, "commit": package_commit(item)})

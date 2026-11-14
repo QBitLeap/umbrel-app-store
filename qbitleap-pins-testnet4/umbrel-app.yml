@@ -30,8 +30,8 @@
   "dependencies": [
     "qbitleap-core-testnet4"
   ],
-  "repo": "https://github.com/QBitLeap/pins-umbrel",
-  "support": "https://github.com/QBitLeap/pins-umbrel/issues",
+  "repo": "https://github.com/QBitLeap/pins-app",
+  "support": "https://github.com/QBitLeap/pins-app/issues",
   "port": 5112,
   "icon": "https://raw.githubusercontent.com/QBitLeap/umbrel-app-store/main/qbitleap-pins-testnet4/icon.svg?v=0.1.6",
   "gallery": [],

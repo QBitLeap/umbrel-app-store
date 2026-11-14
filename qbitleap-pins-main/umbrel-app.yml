@@ -30,10 +30,10 @@
   "dependencies": [
     "qbitleap-core-main"
   ],
-  "repo": "https://github.com/QBitLeap/pins-umbrel",
-  "support": "https://github.com/QBitLeap/pins-umbrel/issues",
+  "repo": "https://github.com/QBitLeap/pins-app",
+  "support": "https://github.com/QBitLeap/pins-app/issues",
   "port": 5102,
-  "icon": "https://raw.githubusercontent.com/QBitLeap/pins-umbrel/374492cc1263a2c13f3f052ab776fc5d16c84dde/icon.svg",
+  "icon": "https://raw.githubusercontent.com/QBitLeap/pins-app/374492cc1263a2c13f3f052ab776fc5d16c84dde/icon.svg",
   "gallery": [],
   "path": "",
   "defaultUsername": "",

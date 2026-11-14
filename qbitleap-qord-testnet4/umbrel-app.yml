@@ -30,8 +30,8 @@
   "dependencies": [
     "qbitleap-core-testnet4"
   ],
-  "repo": "https://github.com/QBitLeap/qord-umbrel",
-  "support": "https://github.com/QBitLeap/qord-umbrel/issues",
+  "repo": "https://github.com/QBitLeap/qord-app",
+  "support": "https://github.com/QBitLeap/qord-app/issues",
   "port": 5113,
   "icon": "https://raw.githubusercontent.com/QBitLeap/umbrel-app-store/main/qbitleap-qord-testnet4/icon.svg?v=0.1.6",
   "gallery": [],

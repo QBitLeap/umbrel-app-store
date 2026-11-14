@@ -380,7 +380,7 @@ def main():
  parser.add_argument('--sources',type=Path,required=True)
  args=parser.parse_args()
  sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
- from catalog import validate_images
+ from catalog import validate_images, image_source_repository
  images=validate_images(json.loads(args.images.read_text()))
  sources=json.loads(args.sources.read_text())['apps']
  if sys.platform!='linux' or os.uname().machine!='x86_64': parser.error('Linux amd64 Docker host required')
@@ -394,7 +394,7 @@ def main():
   source=sources['qbit-core' if role in {'core','services'} else role]
   labels=info['Config'].get('Labels',{})
   if (labels.get('org.opencontainers.image.revision')!=source['commit'] or
-      labels.get('org.opencontainers.image.source')!=source['repository'].removesuffix('.git')):
+      labels.get('org.opencontainers.image.source')!=image_source_repository('qbit-core' if role in {'core','services'} else role,source).removesuffix('.git')):
    raise ValueError('Published image does not identify the pinned app source')
  result={'passed':False,'images':images,'networks':{},'productionServicesStarted':False,'operationalDataMounted':False,'peerNetworkingEnabled':False,'externalPeerNetworkingEnabled':False,'internalFixturePeerSwitchTested':True}
  try:
