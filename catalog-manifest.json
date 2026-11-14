@@ -1,15 +1,16 @@
 {
   "files": {
     "acceptance.json": "f4c7f42fcb5b92406bacea9c480e1b4bf56b93d0fbb4fdb865dbcf26f22747c5",
+    "core-broker-acceptance.json": "badb87fc3f65d446cdbc8d00e84e8c1db9b5c8452ce99463321233a62a3cdbb3",
     "images.lock.json": "9d9d17c493ab74e3e4d1571b436f8eaba292671f2bf67fac596b4a799547c413",
     "qbitleap-core-main/data/auth/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "qbitleap-core-main/data/core/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "qbitleap-core-main/docker-compose.yml": "d07af63b87344c2979fcd8a9db052108f9084e4f7d2bff855872913da6cf51ec",
+    "qbitleap-core-main/docker-compose.yml": "1bca77f9f148b44efac7ed2672b1aa9de0133de37115318551d98a23bbf7fcfb",
     "qbitleap-core-main/exports.sh": "639fdd630ab39670422f1cf9b3e87ae752a229b6d2dfbaa2de83a552c705c9b1",
     "qbitleap-core-main/icon.svg": "6a05504ddbd79dc12ea6b46eeab36a6b9aca23ce5bd33b8e94bb9fedf419e0b1",
-    "qbitleap-core-main/package-receipt.json": "64e80cf73fc740d53ab29f488526e8ee44e637a3712357b0a881e418760fd5fb",
+    "qbitleap-core-main/package-receipt.json": "859c09d5a2bf94d8eb1e8e3c746d0c924f5d6d6d6eee3fff11ffd753a3a26487",
     "qbitleap-core-main/qbit-terminal.sh": "0e2233737a101f72a1c9aff858a6034688c2bbb6978c5ec7626eb18260f37b96",
-    "qbitleap-core-main/umbrel-app.yml": "3d533bae7c829278f6012f5f72555d43256f49662e70898f3b73734dcc816660",
+    "qbitleap-core-main/umbrel-app.yml": "d7364bb037852e5d107522697e53aa9f621134d49b4c970bd296c257afd43c75",
     "qbitleap-core-testnet4/data/auth/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "qbitleap-core-testnet4/data/core/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "qbitleap-core-testnet4/docker-compose.yml": "a2c017b1c5a4dda56b6e3b650624da74a7ab66249cf72ac90e6261f3069a6af5",
@@ -62,6 +63,13 @@
     "pins": "ghcr.io/qbitleap/pins-indexer@sha256:1508c58ee0d3bd9176d84fe23cfe1e44c369c14a10b8a0b88d1f39ea8b163168",
     "qord": "ghcr.io/qbitleap/qord-indexer@sha256:effe4a0026a1f3326a78b22ebfe8177b1467a4f91039cf5e7e3a426bc51abd97",
     "services": "ghcr.io/qbitleap/qbit-core-services@sha256:8f6f91e8fbcdc59b67fb7cffd5bc7c105e2b9ea40957444838a6f7a32cac90b8"
+  },
+  "overlays": {
+    "coreMainnetBroker": {
+      "imageReference": "ghcr.io/qbitleap/qbit-core-services@sha256:b222a85169b539113252dc97259371e70817a41e3cec589262997b596519b455",
+      "receipt": "core-broker-acceptance.json",
+      "sourceRevision": "8ad465cc7a6daa72eb8670e99c6613fc6867d03e"
+    }
   },
   "sources": {
     "apps": {

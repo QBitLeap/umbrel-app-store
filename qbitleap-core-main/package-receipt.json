@@ -10,10 +10,13 @@
   "files": {
     "data/auth/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "data/core/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "docker-compose.yml": "d07af63b87344c2979fcd8a9db052108f9084e4f7d2bff855872913da6cf51ec",
+    "docker-compose.yml": "1bca77f9f148b44efac7ed2672b1aa9de0133de37115318551d98a23bbf7fcfb",
     "exports.sh": "639fdd630ab39670422f1cf9b3e87ae752a229b6d2dfbaa2de83a552c705c9b1",
     "icon.svg": "6a05504ddbd79dc12ea6b46eeab36a6b9aca23ce5bd33b8e94bb9fedf419e0b1",
     "qbit-terminal.sh": "0e2233737a101f72a1c9aff858a6034688c2bbb6978c5ec7626eb18260f37b96",
-    "umbrel-app.yml": "3d533bae7c829278f6012f5f72555d43256f49662e70898f3b73734dcc816660"
-  }
+    "umbrel-app.yml": "d7364bb037852e5d107522697e53aa9f621134d49b4c970bd296c257afd43c75"
+  },
+  "brokerImage": "ghcr.io/qbitleap/qbit-core-services@sha256:b222a85169b539113252dc97259371e70817a41e3cec589262997b596519b455",
+  "brokerImageSourceRevision": "8ad465cc7a6daa72eb8670e99c6613fc6867d03e",
+  "brokerImagePublicationAccepted": true
 }

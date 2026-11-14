@@ -1,0 +1,20 @@
+{
+  "format": "public-profile-broker-acceptance-v1",
+  "observedAt": "2026-11-14T05:09:05.008411+00:00",
+  "imageReference": "ghcr.io/qbitleap/qbit-core-services@sha256:b222a85169b539113252dc97259371e70817a41e3cec589262997b596519b455",
+  "imageId": "sha256:7ae7c7dd2994e9a6684d02b1bbcb08cf1c8ce07845771c9150c08be9d8d1b6a2",
+  "rpcSha256": "d9a7dc4125eaca27efe621e903fd790e40adfa65c2ab785d46ca1492e05a9055",
+  "releaseRun": "https://github.com/QBitLeap/qbit-core-umbrel/actions/runs/43559998655",
+  "sourceRevision": "8ad465cc7a6daa72eb8670e99c6613fc6867d03e",
+  "releaseRunAccepted": true,
+  "anonymousClosureVerified": true,
+  "acceptedBrokerSourceMatches": true,
+  "coreDaemonBuilt": false,
+  "scope": "qbitleap-core-main broker only",
+  "baseServicesImage": "ghcr.io/qbitleap/qbit-core-services@sha256:8f6f91e8fbcdc59b67fb7cffd5bc7c105e2b9ea40957444838a6f7a32cac90b8",
+  "unchangedCoreDaemonImage": "ghcr.io/qbitleap/qbit-core@sha256:af9aca0fe1805090eb6b503505b659af434798d852a6b8efe6341bf1d5d65761",
+  "unchangedUIImage": "ghcr.io/qbitleap/qbit-core-services@sha256:8f6f91e8fbcdc59b67fb7cffd5bc7c105e2b9ea40957444838a6f7a32cac90b8",
+  "fullUmbrelInstallationAccepted": false,
+  "realWalletProofAccepted": false,
+  "existingFullSuiteAcceptanceReusedForNewBroker": false
+}

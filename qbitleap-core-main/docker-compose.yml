@@ -69,7 +69,7 @@
       "tmpfs": [
         "/tmp:rw,nosuid,nodev,noexec,size=32m,mode=1777"
       ],
-      "image": "ghcr.io/qbitleap/qbit-core-services@sha256:8f6f91e8fbcdc59b67fb7cffd5bc7c105e2b9ea40957444838a6f7a32cac90b8",
+      "image": "ghcr.io/qbitleap/qbit-core-services@sha256:b222a85169b539113252dc97259371e70817a41e3cec589262997b596519b455",
       "command": [
         "broker"
       ],
