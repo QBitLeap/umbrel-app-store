@@ -2,7 +2,7 @@
   "manifestVersion": 2.0,
   "id": "qbitleap-q20-main",
   "name": "q20 Indexer",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "tagline": "Independent QBIT-20 messages and token indexing",
   "category": "finance",
   "description": "Index QBIT-20 JSON messages, balances and bound listing outputs using your Qbit Core. Starts indexing automatically. Includes a browser dashboard and authenticated read API.",
@@ -20,6 +20,6 @@
   "path": "",
   "gallery": [],
   "submitter": "QBitLeap",
-  "releaseNotes": "Initial q20 0.1.1. Native platform and isolated Core/gateway lifecycle checks passed. Starts Mainnet indexing automatically. Experimental: managed installation and real-chain replay parity are separate checks.",
+  "releaseNotes": "Checks for new blocks every five seconds without rescanning unchanged data. Preserves existing index data and protocol rules.",
   "icon": "https://raw.githubusercontent.com/QBitLeap/q20/main/icon.svg"
 }
