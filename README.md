@@ -72,3 +72,14 @@ catalog workflow validates all dependency credential contexts before promoting
 only the new q20 entry. Existing Core/LEAP/PINS/qord packages and their versions
 are preserved. A Testnet4 q20 entry is not generated without reviewed activation
 rules. See the q20 repository's validation findings for installation/parity gates.
+
+## Automatic Core upstream updates
+
+`Accept and publish upstream Core catalog` checks every six hours for the
+verified image receipt published by QBitLeap/qbit-core. It checks all five public
+image manifests and runs the existing isolated Core/LEAP/PINS/qord integration
+for the supported networks before promoting Core's two catalog entries. Other
+apps, including q20, retain their existing source and package files. Sources and
+acceptance receipts identify the exact new images. It does not install an update
+on any Umbrel node. Each repository's own GITHUB_TOKEN is sufficient; no shared
+credential or external deployment agent is introduced.

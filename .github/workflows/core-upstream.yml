@@ -1,0 +1,63 @@
+name: Accept and publish upstream Core catalog
+on:
+  schedule:
+    - cron: '47 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: community-catalog
+  cancel-in-progress: false
+jobs:
+  core:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.13'
+      - name: Discover newly verified public Core images
+        id: candidate
+        run: python scripts/core_upstream.py prepare
+      - name: Existing catalog source and scope tests
+        if: steps.candidate.outputs.changed == 'true'
+        run: python -m unittest discover -s tests -v
+      - name: Require anonymous image pulls and pinned source
+        if: steps.candidate.outputs.changed == 'true'
+        run: |
+          python scripts/check_public_images.py .release/core-upstream/images.json
+          python scripts/fetch_sources.py .release/core-upstream/sources --lock .release/core-upstream/sources.json
+      - name: Required full isolated cross-app integration
+        if: steps.candidate.outputs.changed == 'true'
+        run: python checks/integration.py .release/core-upstream/images.json --sources .release/core-upstream/sources.json --output .release/core-upstream/acceptance.json
+      - name: Generate and scope the accepted Core packages
+        if: steps.candidate.outputs.changed == 'true'
+        env:
+          CORE_VERSION: ${{ steps.candidate.outputs.version }}
+        run: |
+          python scripts/catalog.py .release/core-upstream/generated --apps-root .release/core-upstream/sources --sources .release/core-upstream/sources.json --images .release/core-upstream/images.json --acceptance .release/core-upstream/acceptance.json --version "$CORE_VERSION"
+          python scripts/core_upstream.py promote
+          python scripts/check_exports.py .
+      - name: Publish the tested update in the community catalog
+        if: steps.candidate.outputs.changed == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config commit.gpgsign false
+          git add -- qbitleap-core-main qbitleap-core-testnet4 images.lock.json sources.lock.json acceptance.json catalog-manifest.json core-upstream-acceptance.json
+          git diff --cached --check
+          git commit -m 'Publish verified upstream Core update after isolated integration'
+          git push origin HEAD:main
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: core-upstream-catalog-evidence
+          if-no-files-found: ignore
+          include-hidden-files: true
+          path: .release/core-upstream
