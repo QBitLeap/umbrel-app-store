@@ -138,7 +138,8 @@ def promote(catalog, repository):
     for rel in owned:
         path = Path(rel)
         if path.is_absolute() or ".." in path.parts or not (
-                path.parts[0].startswith("qbitleap-") or rel in {"images.lock.json", "acceptance.json"}):
+                path.parts[0].startswith("qbitleap-") or rel in {"images.lock.json", "acceptance.json"}
+                or (rel == "core-broker-acceptance.json" and rel in old and manifest["files"].get(rel) == old[rel])):
             raise ValueError("Unexpected managed catalog path")
         target = repository / rel
         if any(p.is_symlink() for p in [target, *list(target.parents)[:len(path.parts) - 1]]):
