@@ -13,7 +13,7 @@ class CoreUpstream(unittest.TestCase):
   self.assertEqual(new['apps']['qbit-core']['packageCommit'],'a'*40)
  def test_missing_duplicate_unpublished_or_wrong_provenance_refused(self):
   images=json.loads((ROOT/'images.lock.json').read_bytes());sources=json.loads((ROOT/'sources.lock.json').read_bytes())
-  for mode in('missing','duplicate','unpublished','revision','quorum','network','desktop-missing','desktop-failed','desktop-digest'):
+  for mode in('missing','duplicate','unpublished','revision','quorum','network'):
    r=self.receipt()
    if mode=='missing':r['images'].pop()
    if mode=='duplicate':r['images'].append(r['images'][0])
@@ -21,10 +21,10 @@ class CoreUpstream(unittest.TestCase):
    if mode=='revision':r['images'][0]['sourceRevision']='b'*40
    if mode=='quorum':r['upstreamVerification']['verifiedPrimarySigners']=['1','1','1']
    if mode=='network':r['upstreamTag']='v0.9.0'
-   if mode=='desktop-missing':r['platformChecks'].pop('windows-x64')
-   if mode=='desktop-failed':r['platformChecks']['windows-x64']['passed']=False
-   if mode=='desktop-digest':r['platformChecks']['windows-x64']['archiveSha256']='b'*64
    with self.subTest(mode=mode),self.assertRaises(ValueError):m.candidate(r,images,sources)
+ def test_desktop_failures_do_not_block_umbrel_candidate(self):
+  images=json.loads((ROOT/'images.lock.json').read_bytes());sources=json.loads((ROOT/'sources.lock.json').read_bytes());receipt=self.receipt();receipt.pop('platformChecks');receipt['upstreamVerification'].pop('platformArtifacts');receipt['platformChecksPassed']=False
+  result,_=m.candidate(receipt,images,sources);self.assertNotEqual(result['core'],images['core'])
  def test_scoped_catalog_preserves_other_apps(self):
   with tempfile.TemporaryDirectory()as tmp:
    root=Path(tmp);generated=root/'generated';generated.mkdir();out=root/'scoped';files={}

@@ -12,12 +12,6 @@ def candidate(receipt,images,sources):
  if receipt.get('format')!='qbitleap-image-release-v1'or not re.fullmatch(r'v1\.\d+\.\d+',receipt.get('upstreamTag',''))or not re.fullmatch('[0-9a-f]{40}',receipt.get('sourceRevision','')):raise ValueError('Verified Core release receipt required')
  verification=receipt.get('upstreamVerification',{})
  if verification.get('upstreamTag')!=receipt['upstreamTag']or verification.get('signatureQuorum',0)<3 or len(set(verification.get('verifiedPrimarySigners',[])))<verification['signatureQuorum']:raise ValueError('Pinned upstream signature quorum receipt required')
- targets={'macos-arm64','macos-x64','windows-x64','linux-x64','linux-arm64'}
- checks=receipt.get('platformChecks',{});artifacts=verification.get('platformArtifacts',{})
- if receipt.get('platformChecksPassed')is not True or set(checks)!=targets or set(artifacts)!=targets:raise ValueError('Complete native desktop verification required before catalog publication')
- for target in targets:
-  row=checks[target]
-  if row.get('passed')is not True or row.get('target')!=target or row.get('upstreamTag')!=receipt['upstreamTag']or row.get('archiveSha256')!=artifacts[target]['sha256']or row.get('nodeStarted')is not False or row.get('installedDataAccessed')is not False:raise ValueError('Desktop platform acceptance differs')
  result=dict(images);seen=set()
  for row in receipt.get('images',[]):
   role={'qbit-core':'core','qbit-core-services':'services'}.get(row.get('component'))

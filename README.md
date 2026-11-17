@@ -85,11 +85,11 @@ on any Umbrel node. Each repository's own GITHUB_TOKEN is sufficient; no shared
 credential or external deployment agent is introduced.
 
 
-The Core release schedule is 12 hours. macOS (Apple Silicon and Intel), Windows x64,
-and Linux (x64 and ARM64) archives must pass native signed-checksum and version
-checks before the Umbrel image publication job runs. The store verifies those
-platform receipts again before its existing image/integration gates. Desktop
-options use the official upstream binaries; Umbrel uses our tested Docker images.
+The Core release schedule is 12 hours. Umbrel publication is gated only by its
+own signature, image, anonymous-pull and cross-app integration checks. macOS,
+Windows and Linux run in a separate 12-hour workflow with independent native
+architecture jobs; their failures never block Umbrel publication. Desktop options
+use official upstream binaries, while Umbrel uses our tested Docker images.
 
 Future Ollama integration should consume the accepted community-store version and
 digest through the existing managed Umbrel update workflow. Ollama is not installed
