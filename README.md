@@ -75,7 +75,7 @@ rules. See the q20 repository's validation findings for installation/parity gate
 
 ## Automatic Core upstream updates
 
-`Accept and publish upstream Core catalog` checks every six hours for the
+`Accept and publish upstream Core catalog` checks every twelve hours for the
 verified image receipt published by QBitLeap/qbit-core. It checks all five public
 image manifests and runs the existing isolated Core/LEAP/PINS/qord integration
 for the supported networks before promoting Core's two catalog entries. Other
@@ -83,3 +83,15 @@ apps, including q20, retain their existing source and package files. Sources and
 acceptance receipts identify the exact new images. It does not install an update
 on any Umbrel node. Each repository's own GITHUB_TOKEN is sufficient; no shared
 credential or external deployment agent is introduced.
+
+
+The Core release schedule is 12 hours. macOS (Apple Silicon and Intel), Windows x64,
+and Linux (x64 and ARM64) archives must pass native signed-checksum and version
+checks before the Umbrel image publication job runs. The store verifies those
+platform receipts again before its existing image/integration gates. Desktop
+options use the official upstream binaries; Umbrel uses our tested Docker images.
+
+Future Ollama integration should consume the accepted community-store version and
+digest through the existing managed Umbrel update workflow. Ollama is not installed
+or connected by this release automation. No running node, 8 GiB policy, database,
+wallet, jobs or signing gates are changed by publication.

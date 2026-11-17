@@ -1,7 +1,7 @@
 name: Accept and publish upstream Core catalog
 on:
   schedule:
-    - cron: '47 */6 * * *'
+    - cron: '47 */12 * * *'
   workflow_dispatch:
 permissions:
   contents: read

@@ -5,14 +5,15 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'scripts'));
 class CoreUpstream(unittest.TestCase):
  def receipt(self):
   revision='a'*40
-  return {'format':'qbitleap-image-release-v1','upstreamTag':'v1.0.1','sourceRevision':revision,'upstreamVerification':{'upstreamTag':'v1.0.1','signatureQuorum':3,'verifiedPrimarySigners':['1','2','3']},'images':[{'component':c,'published':True,'platform':'linux/amd64','sourceRevision':revision,'image':'ghcr.io/qbitleap/'+c+'@sha256:'+str(i)*64}for i,c in enumerate(('qbit-core','qbit-core-services'),1)]}
+  receipt={'format':'qbitleap-image-release-v1','upstreamTag':'v1.0.1','sourceRevision':revision,'upstreamVerification':{'upstreamTag':'v1.0.1','signatureQuorum':3,'verifiedPrimarySigners':['1','2','3']},'images':[{'component':c,'published':True,'platform':'linux/amd64','sourceRevision':revision,'image':'ghcr.io/qbitleap/'+c+'@sha256:'+str(i)*64}for i,c in enumerate(('qbit-core','qbit-core-services'),1)]}
+  targets=['macos-arm64','macos-x64','windows-x64','linux-x64','linux-arm64'];receipt['platformChecksPassed']=True;receipt['upstreamVerification']['platformArtifacts']={t:{'sha256':'a'*64}for t in targets};receipt['platformChecks']={t:{'target':t,'passed':True,'upstreamTag':'v1.0.1','archiveSha256':'a'*64,'nodeStarted':False,'installedDataAccessed':False}for t in targets};return receipt
  def test_only_core_images_and_source_change(self):
   images=json.loads((ROOT/'images.lock.json').read_bytes());sources=json.loads((ROOT/'sources.lock.json').read_bytes());result,new=m.candidate(self.receipt(),images,sources)
   for role in('leap','pins','qord'):self.assertEqual(result[role],images[role]);self.assertEqual(new['apps'][role],sources['apps'][role])
   self.assertEqual(new['apps']['qbit-core']['packageCommit'],'a'*40)
  def test_missing_duplicate_unpublished_or_wrong_provenance_refused(self):
   images=json.loads((ROOT/'images.lock.json').read_bytes());sources=json.loads((ROOT/'sources.lock.json').read_bytes())
-  for mode in('missing','duplicate','unpublished','revision','quorum','network'):
+  for mode in('missing','duplicate','unpublished','revision','quorum','network','desktop-missing','desktop-failed','desktop-digest'):
    r=self.receipt()
    if mode=='missing':r['images'].pop()
    if mode=='duplicate':r['images'].append(r['images'][0])
@@ -20,6 +21,9 @@ class CoreUpstream(unittest.TestCase):
    if mode=='revision':r['images'][0]['sourceRevision']='b'*40
    if mode=='quorum':r['upstreamVerification']['verifiedPrimarySigners']=['1','1','1']
    if mode=='network':r['upstreamTag']='v0.9.0'
+   if mode=='desktop-missing':r['platformChecks'].pop('windows-x64')
+   if mode=='desktop-failed':r['platformChecks']['windows-x64']['passed']=False
+   if mode=='desktop-digest':r['platformChecks']['windows-x64']['archiveSha256']='b'*64
    with self.subTest(mode=mode),self.assertRaises(ValueError):m.candidate(r,images,sources)
  def test_scoped_catalog_preserves_other_apps(self):
   with tempfile.TemporaryDirectory()as tmp:
