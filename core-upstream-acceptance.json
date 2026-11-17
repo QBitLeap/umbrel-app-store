@@ -1,0 +1,261 @@
+{
+  "sourceReceipt": {
+    "format": "qbitleap-image-release-v1",
+    "images": [
+      {
+        "component": "qbit-core",
+        "platform": "linux/amd64",
+        "sourceRevision": "906dfefe5053177d74fcc478ac63ec33bedf7cfe",
+        "localImageId": "sha256:ba5949b7a22970bfe6d2a098112c0a5218c28e9e21b3c695282c7c651fc5f8a1",
+        "published": true,
+        "image": "ghcr.io/qbitleap/qbit-core@sha256:68bf2a2ded94084083c0f2c9598f3628cd72735be321e134b47f423b2c307bd3",
+        "version": "1.0.1-upstream.43993563405.1",
+        "fullStackAcceptanceRequired": true
+      },
+      {
+        "component": "qbit-core-services",
+        "platform": "linux/amd64",
+        "sourceRevision": "906dfefe5053177d74fcc478ac63ec33bedf7cfe",
+        "localImageId": "sha256:56902cb74411fd9c8ea203a17bc6c33dcf06e0385eba999af208935b2183a6cd",
+        "published": true,
+        "image": "ghcr.io/qbitleap/qbit-core-services@sha256:72d392a54f4639ddb71f9fb8f59c34b71f20cf0638a4b006a4fe30e24127b538",
+        "version": "1.0.1-upstream.43993563405.1",
+        "fullStackAcceptanceRequired": true
+      }
+    ],
+    "upstreamTag": "v1.0.1",
+    "upstreamVerification": {
+      "format": "qbit-core-upstream-verification-v1",
+      "upstreamTag": "v1.0.1",
+      "upstreamRelease": "https://github.com/Qbit-Org/qbit/releases/tag/v1.0.1",
+      "upstreamPublishedAt": "2026-11-13T19:48:49Z",
+      "artifactSha256": "5f3ce43c3525328f4f0cdcc898516e274a16e170e4ed91ccf648bbb1094f6cb6",
+      "binaries": {
+        "qbitd": "c52f801024a48bd1bb19804c065840cf93ab799dfc0b1af4644faef1be3fcd0a",
+        "qbit-cli": "6b7ad86f87ca017274f7a10a6998f5c4b36d9c23545b2baddfe16c682708494b"
+      },
+      "keyPolicySha256": "f04ae262bd40cdda5c481fc18cef29b405878e66d06c33b49865ea42b38eaf9f",
+      "trustBootstrapCommit": "7ebcddb622d6e639041f005a189b048ec2a221fe",
+      "verifiedPrimarySigners": [
+        "51F569645F0545B0E6C840C2357052443CE094D8",
+        "A762712935A3FFBC6523EAEBA637B315184F8119",
+        "E875FE223D78E2BA7F785B587BFF9C2A1FB522FC"
+      ],
+      "signatureQuorum": 3,
+      "installationPerformed": false
+    },
+    "sourceRevision": "906dfefe5053177d74fcc478ac63ec33bedf7cfe",
+    "catalogAcceptanceRequired": true
+  },
+  "integration": {
+    "passed": true,
+    "images": {
+      "core": "ghcr.io/qbitleap/qbit-core@sha256:68bf2a2ded94084083c0f2c9598f3628cd72735be321e134b47f423b2c307bd3",
+      "leap": "ghcr.io/qbitleap/leap-indexer@sha256:ac68aaf28b96cebf6f7be35b3994fa79b34cfd36e1778db4cc5dfde348d05594",
+      "pins": "ghcr.io/qbitleap/pins-indexer@sha256:1508c58ee0d3bd9176d84fe23cfe1e44c369c14a10b8a0b88d1f39ea8b163168",
+      "qord": "ghcr.io/qbitleap/qord-indexer@sha256:effe4a0026a1f3326a78b22ebfe8177b1467a4f91039cf5e7e3a426bc51abd97",
+      "services": "ghcr.io/qbitleap/qbit-core-services@sha256:72d392a54f4639ddb71f9fb8f59c34b71f20cf0638a4b006a4fe30e24127b538"
+    },
+    "networks": {
+      "main": {
+        "passed": true,
+        "chain": "main",
+        "runId": "13b890d9f30a4f29a3b62322a1ece69f",
+        "protocols": {
+          "leap": {
+            "app": "LEAP",
+            "network": "main",
+            "nodeHeight": 0,
+            "indexHeight": 0,
+            "indexHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
+            "items": 0,
+            "observedSynchronized": false,
+            "transactionRoutingAccepted": false,
+            "indexingEnabled": true,
+            "apiAuthenticationAccepted": true,
+            "restartAccepted": true,
+            "duplicateWriterRefused": true,
+            "tipErrorCodePreserved": true,
+            "terminalAccepted": true
+          },
+          "pins": {
+            "app": "PINS",
+            "network": "main",
+            "nodeHeight": 0,
+            "indexHeight": -1,
+            "indexHash": null,
+            "items": 0,
+            "observedSynchronized": false,
+            "transactionRoutingAccepted": false,
+            "indexingEnabled": true,
+            "apiAuthenticationAccepted": true,
+            "restartAccepted": true,
+            "duplicateWriterRefused": true,
+            "tipErrorCodePreserved": true,
+            "terminalAccepted": true
+          },
+          "qord": {
+            "app": "qord",
+            "network": "main",
+            "nodeHeight": 0,
+            "indexHeight": 0,
+            "indexHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
+            "items": 0,
+            "observedSynchronized": false,
+            "transactionRoutingAccepted": false,
+            "indexingEnabled": true,
+            "apiAuthenticationAccepted": true,
+            "restartAccepted": true,
+            "duplicateWriterRefused": true,
+            "tipErrorCodePreserved": true,
+            "terminalAccepted": true
+          }
+        },
+        "stage": "all isolated app checks passed",
+        "coreBeforeRestart": {
+          "network": "main",
+          "blocks": 0,
+          "headers": 0,
+          "bestBlockHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
+          "verificationProgress": 5.582851044788701e-06,
+          "initialBlockDownload": true,
+          "txindexSynced": true,
+          "txindexHeight": 0,
+          "peerNetworkingEnabled": false,
+          "connections": 0,
+          "chainAndIndexReady": false,
+          "transactionRoutingAccepted": false,
+          "networkControlAvailable": false
+        },
+        "core": {
+          "network": "main",
+          "blocks": 0,
+          "headers": 0,
+          "bestBlockHash": "0000000000004d60aa5d46013991d0a0e2995d89ee98e53068ae196d763e79f2",
+          "verificationProgress": 5.582851044788701e-06,
+          "initialBlockDownload": true,
+          "txindexSynced": true,
+          "txindexHeight": 0,
+          "peerNetworkingEnabled": false,
+          "connections": 0,
+          "chainAndIndexReady": false,
+          "transactionRoutingAccepted": false,
+          "networkControlAvailable": false,
+          "unauthenticatedReadRejected": true,
+          "publicationRpcRejected": true,
+          "uiHasNoCoreCookie": true,
+          "rawRpcNotReachableFromNeighbor": true,
+          "restartAccepted": true,
+          "tipErrorCodePreserved": true,
+          "networkingControlAccepted": true,
+          "networkingChoiceSurvivedRestart": true,
+          "finalFixtureNetworkingDisabled": true
+        },
+        "fixtureCleanupComplete": true,
+        "cleanupErrors": []
+      },
+      "testnet4": {
+        "passed": true,
+        "chain": "testnet4",
+        "runId": "086070d71f774ddda51efc006827b6d2",
+        "protocols": {
+          "leap": {
+            "app": "LEAP",
+            "network": "testnet4",
+            "nodeHeight": 0,
+            "indexHeight": 0,
+            "indexHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
+            "items": 0,
+            "observedSynchronized": false,
+            "transactionRoutingAccepted": false,
+            "indexingEnabled": true,
+            "apiAuthenticationAccepted": true,
+            "restartAccepted": true,
+            "duplicateWriterRefused": true,
+            "tipErrorCodePreserved": true,
+            "terminalAccepted": true
+          },
+          "pins": {
+            "app": "PINS",
+            "network": "testnet4",
+            "nodeHeight": 0,
+            "indexHeight": 0,
+            "indexHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
+            "items": 0,
+            "observedSynchronized": false,
+            "transactionRoutingAccepted": false,
+            "indexingEnabled": true,
+            "apiAuthenticationAccepted": true,
+            "restartAccepted": true,
+            "duplicateWriterRefused": true,
+            "tipErrorCodePreserved": true,
+            "terminalAccepted": true
+          },
+          "qord": {
+            "app": "qord",
+            "network": "testnet4",
+            "nodeHeight": 0,
+            "indexHeight": 0,
+            "indexHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
+            "items": 0,
+            "observedSynchronized": false,
+            "transactionRoutingAccepted": false,
+            "indexingEnabled": true,
+            "apiAuthenticationAccepted": true,
+            "restartAccepted": true,
+            "duplicateWriterRefused": true,
+            "tipErrorCodePreserved": true,
+            "terminalAccepted": true
+          }
+        },
+        "stage": "all isolated app checks passed",
+        "coreBeforeRestart": {
+          "network": "testnet4",
+          "blocks": 0,
+          "headers": 0,
+          "bestBlockHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
+          "verificationProgress": 4.554556412394132e-06,
+          "initialBlockDownload": true,
+          "txindexSynced": true,
+          "txindexHeight": 0,
+          "peerNetworkingEnabled": false,
+          "connections": 0,
+          "chainAndIndexReady": false,
+          "transactionRoutingAccepted": false,
+          "networkControlAvailable": false
+        },
+        "core": {
+          "network": "testnet4",
+          "blocks": 0,
+          "headers": 0,
+          "bestBlockHash": "000000000000796fe86bbc0bf1b66a07e4b4c0676f74b54cf7e5ce8b3f1a0090",
+          "verificationProgress": 4.554556412394132e-06,
+          "initialBlockDownload": true,
+          "txindexSynced": true,
+          "txindexHeight": 0,
+          "peerNetworkingEnabled": false,
+          "connections": 0,
+          "chainAndIndexReady": false,
+          "transactionRoutingAccepted": false,
+          "networkControlAvailable": false,
+          "unauthenticatedReadRejected": true,
+          "publicationRpcRejected": true,
+          "uiHasNoCoreCookie": true,
+          "rawRpcNotReachableFromNeighbor": true,
+          "restartAccepted": true,
+          "tipErrorCodePreserved": true,
+          "networkingControlAccepted": true,
+          "networkingChoiceSurvivedRestart": true,
+          "finalFixtureNetworkingDisabled": true
+        },
+        "fixtureCleanupComplete": true,
+        "cleanupErrors": []
+      }
+    },
+    "productionServicesStarted": false,
+    "operationalDataMounted": false,
+    "peerNetworkingEnabled": false,
+    "externalPeerNetworkingEnabled": false,
+    "internalFixturePeerSwitchTested": true
+  }
+}

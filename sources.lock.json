@@ -15,9 +15,9 @@
       "repository": "https://github.com/QBitLeap/pins-app.git"
     },
     "qbit-core": {
-      "commit": "71b2684017f8b94c5c17fa1e22f6b574ca19b25d",
-      "imageSourceRepository": "https://github.com/QBitLeap/qbit-core-umbrel.git",
-      "packageCommit": "a9b8c52d4e70fffb3d74f4944cf405c70cc7c5f9",
+      "commit": "906dfefe5053177d74fcc478ac63ec33bedf7cfe",
+      "imageSourceRepository": "https://github.com/QBitLeap/qbit-core.git",
+      "packageCommit": "906dfefe5053177d74fcc478ac63ec33bedf7cfe",
       "path": "",
       "repository": "https://github.com/QBitLeap/qbit-core.git"
     },

@@ -2,21 +2,18 @@
   "format": "qbit-core-app-package-v1",
   "appId": "qbitleap-core-main",
   "chain": "main",
-  "coreImage": "ghcr.io/qbitleap/qbit-core@sha256:af9aca0fe1805090eb6b503505b659af434798d852a6b8efe6341bf1d5d65761",
-  "serviceImage": "ghcr.io/qbitleap/qbit-core-services@sha256:8f6f91e8fbcdc59b67fb7cffd5bc7c105e2b9ea40957444838a6f7a32cac90b8",
+  "coreImage": "ghcr.io/qbitleap/qbit-core@sha256:68bf2a2ded94084083c0f2c9598f3628cd72735be321e134b47f423b2c307bd3",
+  "serviceImage": "ghcr.io/qbitleap/qbit-core-services@sha256:72d392a54f4639ddb71f9fb8f59c34b71f20cf0638a4b006a4fe30e24127b538",
   "localFixtureImages": false,
   "fullUmbrelAppAccepted": false,
   "publicImagePublicationAccepted": false,
   "files": {
     "data/auth/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "data/core/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "docker-compose.yml": "1bca77f9f148b44efac7ed2672b1aa9de0133de37115318551d98a23bbf7fcfb",
+    "docker-compose.yml": "e7daf49efbd84eb1f24491b3afdb97fe5a3e9d528a6d1b0b29fe2f00dae7e5f6",
     "exports.sh": "639fdd630ab39670422f1cf9b3e87ae752a229b6d2dfbaa2de83a552c705c9b1",
     "icon.svg": "6a05504ddbd79dc12ea6b46eeab36a6b9aca23ce5bd33b8e94bb9fedf419e0b1",
     "qbit-terminal.sh": "0e2233737a101f72a1c9aff858a6034688c2bbb6978c5ec7626eb18260f37b96",
-    "umbrel-app.yml": "636e46df888c24b5ab724bfc48345ed9e0682409c0cf4f8a797ac463aa221081"
-  },
-  "brokerImage": "ghcr.io/qbitleap/qbit-core-services@sha256:b222a85169b539113252dc97259371e70817a41e3cec589262997b596519b455",
-  "brokerImageSourceRevision": "8ad465cc7a6daa72eb8670e99c6613fc6867d03e",
-  "brokerImagePublicationAccepted": true
+    "umbrel-app.yml": "89d644f0f3e4048c1a96dbc63b59b29d8325df540b356ac2b7b22320578eba9a"
+  }
 }
